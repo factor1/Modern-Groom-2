@@ -2,7 +2,7 @@
   <div>
     <v-container class="mb-6">
       <v-row align="start" no-gutters style="height: 150px;">
-
+        {{ suitCombo }}
         <v-col cols="12" sm="12" md="4">
           <SuitPart :data="suits" :active="suitCombo.suit" @updateInfo="updateSuit($event)" />
         </v-col>
@@ -10,15 +10,7 @@
           <SuitPart :data="shirts" :active="suitCombo.shirt" @updateInfo="updateShirt($event)" />
         </v-col>
         <v-col cols="12" sm="12" md="4">
-          <div class="tie-container">
-            <div class="tie-colors">
-              <div :class="{'tie-colors__single-colors':true, 'active': suitCombo.color == index } " v-for="(color, index) in ties.colors" :key="color.name" :style="`background-color: ${color.hex}; border-color: ${color.hex};`" @click="setColor(index)">
-                <div :class="{'is-dark': isDark(color.rgb)}">
-                  {{ color.name }} 
-                </div>
-              </div>
-            </div>
-          </div>
+          <SuitTie :data="ties" :selectedcolor="suitCombo.color" :selectedtie="suitCombo.tie" @updateColor="setColor($event)" @tieUpdate="updateTie($event)" />
         </v-col>
 
       </v-row>
@@ -41,8 +33,13 @@ import whiteShirt from '../assets/img/preview/shirtWhite.jpg';
 import ivoryShirt from '../assets/img/preview/shirtBeige.jpg';
 import blackShirt from '../assets/img/preview/shirtBlack.jpg';
 
+// Ties
+import bowTie from '../assets/img/preview/bowtie.jpg';
+import neckTie from '../assets/img/preview/necktie.jpg';
+
 // Components
 import SuitPart from '../components/SuitPart';
+import SuitTie from '../components/SuitTie';
 
 
 export default {
@@ -67,7 +64,10 @@ export default {
       { name: 'Black', color:'#000000', file: blackShirt }
     ],
     ties: { 
-      type: ['neck','bow'],
+      types: [
+        { name: 'Bowtie', file: bowTie },
+        { name: 'Necktie', file: neckTie }
+      ],
       colors: [
         {
           "name": "99C-FUSCHIA",
@@ -776,7 +776,8 @@ export default {
   }),
 
   components: {
-    SuitPart
+    SuitPart,
+    SuitTie
   },
 
   methods: {
@@ -789,48 +790,14 @@ export default {
     setColor(index){
       this.suitCombo.color = index;
     },
-    isDark: rgb => (
-      Math.round(
-        ((
-          (parseInt(rgb.r) * 299) +
-          (parseInt(rgb.g) * 587) +
-          (parseInt(rgb.b) * 114)) / 1000)
-      ) < 125
-    ),
+    updateTie(index){
+      this.suitCombo.tie = index;
+    }
   }
 
 }
 </script>
 
 <style lang="scss" scoped>
-  .tie-container {
-    overflow-x: scroll;
-  }
 
-  .tie-colors {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 4300px;
-
-    &__single-colors {
-      min-width: 200px;
-      min-height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 5px solid;
-      margin: 7px;
-      cursor: pointer;
-
-      &.active {
-        border-color: blue !important;
-      }
-
-      .is-dark {
-        color: #fff;
-      }
-    }
-
-  }
 </style>
