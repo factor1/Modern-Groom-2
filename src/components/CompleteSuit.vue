@@ -20,10 +20,11 @@
         </p>
       </div>
       <hr>
+      <input type="hidden" id="testing-code">
       <v-btn depressed x-large @click="returnEdit(1)">
         Edit suit
       </v-btn>
-      <v-btn depressed x-large>
+      <v-btn depressed x-large @click="shareURL()">
         Share suit
       </v-btn>
     </div>
@@ -37,7 +38,7 @@ import NeckTieComp from '../assets/img/shirts_and_ties/necktie.svg';
 
 export default {
 
-  props:['suit'],
+  props:['suit', 'suitID'],
 
   components: {
     BowTieComp,
@@ -45,6 +46,7 @@ export default {
   },
 
   methods: {
+    
     updatetieColor() {
       const paths = document.getElementsByTagName("path");
       if( this.suit.color ) {
@@ -54,6 +56,27 @@ export default {
 
     returnEdit(step) {
       this.$emit('goto', step);
+    },
+
+    shareURL() {
+
+      let codeToCopy = document.querySelector('#testing-code');
+      let currentUrl = window.location.href;
+      currentUrl = currentUrl.indexOf('?') < 0 ? currentUrl : currentUrl.substring(0, currentUrl.indexOf('?'));
+      console.log(this.suit);
+      codeToCopy.value = currentUrl +`?suit=${this.suitID.suit}&shirt=${this.suitID.shirt}&tie=${this.suitID.tie}&color=${this.suitID.color}`;
+      codeToCopy.setAttribute('type', 'text');
+      codeToCopy.select();
+      try {
+        const successful = document.execCommand('copy');
+        const msg = successful ? 'successfully' : 'unsuccessfully';
+        alert('Shareable url was copied ' + msg);
+      } catch (err) {
+        alert('Oops, unable to copy');
+      }
+
+      codeToCopy.setAttribute('type', 'hidden');
+      window.getSelection().removeAllRanges();
     }
   },
 
@@ -79,14 +102,14 @@ export default {
     }
 
     img {
-      max-width: 100%;
+      width: 100%;
       position: absolute;
       top: 0;
       left: 0;
     }
 
     svg {
-      max-width: 100%;
+      width: 100%;
       position: absolute;
       top: 0;
       left: 0;

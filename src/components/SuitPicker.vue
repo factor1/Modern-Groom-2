@@ -24,7 +24,7 @@
     <v-container class="mb-6" v-show="step == 2">
       <v-row align="start" no-gutters>
         <v-col cols="12" sm="12" md="12">
-          <CompleteSuit :suit="fullSuit" @goto=" step = $event "/>
+          <CompleteSuit :suit="fullSuit" :suitID="suitCombo" @goto=" step = $event "/>
         </v-col>
         <v-btn depressed x-large @click="step = 3">
           Get Quote
@@ -89,9 +89,9 @@ export default {
 
     if (suit,shirt,tie,color) {
       this.suitCombo.suit = this.suits[suit] ? suit : 0;
-      this.suitCombo.shirt = this.suits[shirt] ? shirt : 0;
-      this.suitCombo.tie = this.suits[tie] ? tie : 0;
-      this.suitCombo.color = this.suits[color] ? color : 0;
+      this.suitCombo.shirt = this.shirts[shirt] ? shirt : 0;
+      this.suitCombo.tie = this.ties.types[tie] ? tie : 0;
+      this.suitCombo.color = this.ties.colors[color] ? color : 0;
       this.step = 2;
     }
 
