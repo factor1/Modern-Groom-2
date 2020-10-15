@@ -3,9 +3,10 @@
     <h1>View my suit</h1>
     <div class="full-suit-comp">
       <img class="full-suit-comp__base-image" :src="suit.shirt.part" alt="shirt">
-      <img :src="suit.tie.part" alt="tie">
-      <BowTieComp v-if="suit.tie.name === 'Bowtie'"/>
-      <NeckTieComp v-else/>
+      <div class="tie-component" :style="`background-image: url(${suit.tie.part})`">
+        <BowTieComp v-if="suit.tie.name === 'Bowtie'"/>
+        <NeckTieComp v-else/>
+      </div>
       <img :src="suit.suit.part" alt="suit">
       <img src="../assets/img/suits/head.png" alt="head">
     </div>
@@ -46,7 +47,7 @@ export default {
   },
 
   methods: {
-    
+
     updatetieColor() {
       const paths = document.getElementsByTagName("path");
       if( this.suit.color ) {
@@ -113,7 +114,19 @@ export default {
       position: absolute;
       top: 0;
       left: 0;
+      mix-blend-mode: multiply;
     }
+  }
+
+  .tie-component {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-blend-mode: multiply;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 
   .suit-controls {
