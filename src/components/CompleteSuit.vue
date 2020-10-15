@@ -121,7 +121,6 @@ export default {
   .tie-component {
     background-size: contain;
     background-repeat: no-repeat;
-    background-blend-mode: multiply;
     width: 100%;
     height: 100%;
     position: absolute;
