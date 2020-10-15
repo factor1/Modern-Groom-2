@@ -1,8 +1,8 @@
 <template>
   <div>
-    <v-container class="mb-6">
-      <v-row align="start" no-gutters style="height: 150px;">
-        {{ suitCombo }}
+
+    <v-container class="mb-6" v-show="step == 1">
+      <v-row align="start" no-gutters>
         <v-col cols="12" sm="12" md="4">
           <SuitPart :data="suits" :active="suitCombo.suit" @updateInfo="updateSuit($event)" />
         </v-col>
@@ -12,7 +12,17 @@
         <v-col cols="12" sm="12" md="4">
           <SuitTie :data="ties" :selectedcolor="suitCombo.color" :selectedtie="suitCombo.tie" @updateColor="setColor($event)" @tieUpdate="updateTie($event)" />
         </v-col>
+      </v-row>
+      <v-btn depressed x-large @click="step = 2">
+        Build my suit
+      </v-btn>
+    </v-container>
 
+    <v-container class="mb-6" v-show="step == 2">
+      <v-row align="start" no-gutters>
+        <v-col cols="12" sm="12" md="12">
+          <CompleteSuit :suit="fullSuit"/>
+        </v-col>
       </v-row>
     </v-container>
 
@@ -28,23 +38,41 @@ import darkGray from '../assets/img/preview/gray.jpg';
 import navy from '../assets/img/preview/navy.jpg'; 
 import silver from '../assets/img/preview/silver.jpg'; 
 
+//suits part
+import blackSuitPart from '../assets/img/suits/Black.png';
+import mgSuitPart from '../assets/img/suits/Blue.png';
+import darkGraySuitPart from '../assets/img/suits/DarkGray.png';
+import navySuitPart from '../assets/img/suits/Navy.png';
+import silverSuitPart from '../assets/img/suits/Silver.png';
+
 // Shirts
 import whiteShirt from '../assets/img/preview/shirtWhite.jpg';
 import ivoryShirt from '../assets/img/preview/shirtBeige.jpg';
 import blackShirt from '../assets/img/preview/shirtBlack.jpg';
 
+// Shirt parts
+import whiteShirtPart from '../assets/img/shirts_and_ties/White.png';
+import ivoryShirtPart from '../assets/img/shirts_and_ties/Cream.png';
+import blackShirtPart from '../assets/img/shirts_and_ties/Black.png';
+
 // Ties
 import bowTie from '../assets/img/preview/bowtie.jpg';
 import neckTie from '../assets/img/preview/necktie.jpg';
 
+// Ties parts
+import bowTiePart from '../assets/img/shirts_and_ties/Bowtie.svg';
+import neckTiePart from '../assets/img/shirts_and_ties/necktie.svg';
+
 // Components
 import SuitPart from '../components/SuitPart';
 import SuitTie from '../components/SuitTie';
+import CompleteSuit from '../components/CompleteSuit';
 
 
 export default {
 
   data: () => ({
+    step: 1, 
     suitCombo:{
       suit:0,
       shirt:0,
@@ -52,21 +80,21 @@ export default {
       color: ''
     },
     suits: [
-      { name: 'Black', color: '#000000', file: blackSuit },
-      { name: 'MG Blue', color: '#17202f', file: mgSuit },
-      { name: 'Charcoal Grey', color: '#222222', file: darkGray },
-      { name: 'Navy', color: '#05051e', file: navy },
-      { name: 'Light green', color: '#a3a0a3', file: silver }
+      { name: 'Black', color: '#000000', file: blackSuit, part: blackSuitPart },
+      { name: 'MG Blue', color: '#17202f', file: mgSuit, part: mgSuitPart },
+      { name: 'Charcoal Grey', color: '#222222', file: darkGray, part: darkGraySuitPart },
+      { name: 'Navy', color: '#05051e', file: navy, part: navySuitPart },
+      { name: 'Light green', color: '#a3a0a3', file: silver, part: silverSuitPart }
     ],
     shirts: [
-      { name: 'White', color:'#f0f0f0', file: whiteShirt },
-      { name: 'Ivory', color:'#ecebe6', file: ivoryShirt },
-      { name: 'Black', color:'#000000', file: blackShirt }
+      { name: 'White', color:'#f0f0f0', file: whiteShirt, part: whiteShirtPart },
+      { name: 'Ivory', color:'#ecebe6', file: ivoryShirt, part: ivoryShirtPart },
+      { name: 'Black', color:'#000000', file: blackShirt, part: blackShirtPart }
     ],
     ties: { 
       types: [
-        { name: 'Bowtie', file: bowTie },
-        { name: 'Necktie', file: neckTie }
+        { name: 'Bowtie', file: bowTie, part: bowTiePart },
+        { name: 'Necktie', file: neckTie, part: neckTiePart }
       ],
       colors: [
         {
@@ -775,9 +803,21 @@ export default {
     }
   }),
 
+  computed: {
+    fullSuit() {
+      return {
+        suit: this.suits[this.suitCombo.suit],
+        shirt: this.shirts[this.suitCombo.shirt],
+        tie: this.ties.types[this.suitCombo.tie],
+        color: this.ties.colors[this.suitCombo.color]
+      }
+    }
+  },
+
   components: {
     SuitPart,
-    SuitTie
+    SuitTie,
+    CompleteSuit
   },
 
   methods: {
