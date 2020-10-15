@@ -4,6 +4,7 @@
       <div class="suit-frame">
         <img class="suit-frame__image" :src="data.types[selectedtie].file" alt="suit">
       </div>
+      <h2>Tie Types</h2>
       <div class="suit-options">
         <template>
           <v-container
@@ -24,6 +25,7 @@
       </div>
     </div>
     <div class="tie-container">
+      <h2>Tie Colors</h2>
       <div class="tie-colors">
         <div :class="{'tie-colors__single-colors':true, 'active': selectedcolor == index } " v-for="(color, index) in data.colors" :key="color.name" :style="`background-color: ${color.hex}; border-color: ${color.hex};`" @click="updateColor(index)">
           <div :class="{'is-dark': isDark(color.rgb)}">
