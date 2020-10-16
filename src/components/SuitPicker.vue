@@ -46,6 +46,7 @@
                   v-model="name"
                   :rules="nameRules"
                   label="Full Name"
+                  color=" #22394d"
                   required
                 ></v-text-field>
 
@@ -53,13 +54,15 @@
                   v-model="email"
                   :rules="emailRules"
                   label="E-mail"
+                  color=" #22394d"
                   required
                 ></v-text-field>
 
                 <v-text-field
                   v-model="phone"
-                  :rules="nameRules"
+                  :rules="phoneRules"
                   label="Phone"
+                  color=" #22394d"
                   required
                 ></v-text-field>
 
@@ -68,6 +71,7 @@
                   :items="states"
                   :rules="[v => !!v || 'Item is required']"
                   label="State"
+                  color=" #22394d"
                   required
                 ></v-select>
 
@@ -109,11 +113,10 @@ export default {
       tie:0,
       color: 0,
     },
-    valid: true,
+    valid: false,
     name: '',
     nameRules: [  
       v => !!v || 'Name is required',
-      v => (v && v.length <= 10) || 'Name must be less than 10 characters',
     ],
     email: '',
     emailRules: [
@@ -121,7 +124,10 @@ export default {
       v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
     ],
     select: null,
-    phone:''
+    phone:'',
+    phoneRules: [
+      v => !!v || 'Phone is required'
+    ]
   }),
 
   components: {
@@ -144,31 +150,38 @@ export default {
       this.suitCombo.tie = index;
     },
     sendMail() {
+      
+      this.validate(); 
 
-      const token = '82bf2dac-8dc0-4ae2-a195-f9dc55d90648';
+      console.log(validate);
 
-      const html = `<h2>Quote request</h2><div><h3>Clients data:</h3><p><br> <b>Name: </b> ${this.name} <br> <b>Email: </b> ${this.email} <br> <b>State: </b> ${this.select} <br> <b>Phone: </b> ${this.phone} </p> <h3>Suit data:</h3><p> Suit: </b> ${this.fullSuit.suit.name} <br> Shirt: </b> ${this.fullSuit.shirt.name} <br> Tie type: </b> ${this.fullSuit.tie.name} <br> Tie type: </b> ${this.fullSuit.color.name} </p></div>`;
+      // if(valid) {
+      //   const token = '82bf2dac-8dc0-4ae2-a195-f9dc55d90648';
 
-      Email.send({
-        SecureToken : token,
-        To : 'jorgeparraandrade@gmail.com',
-        From : "jorgeparraandrade@gmail.com",
-        Subject : "Suit quote request",
-        Body : html
-      }).then(
-        message => alert(message)
-      );
+      //   const html = `<h2>Quote request</h2><div><h3>Clients data:</h3><p><b>Name: </b> ${this.name} <br> <b>Email: </b> ${this.email} <br> <b>State: </b> ${this.select} <br> <b>Phone: </b> ${this.phone} </p> <h3>Suit data:</h3><p> Suit: </b> ${this.fullSuit.suit.name} <br> Shirt: </b> ${this.fullSuit.shirt.name} <br> Tie type: </b> ${this.fullSuit.tie.name} <br> Tie type: </b> ${this.fullSuit.color.name} </p></div>`;
+
+      //   Email.send({
+      //     SecureToken : token,
+      //     To : 'jorgeparraandrade@gmail.com',
+      //     From : "jorgeparraandrade@gmail.com",
+      //     Subject : "Suit quote request",
+      //     Body : html
+      //   }).then(
+      //     message => alert(message)
+      //   );
+
+      // }
 
     },
 
-    validate () {
-      this.$refs.form.validate()
+    validate() {
+      this.$refs.form.validate();
     },
-    reset () {
-      this.$refs.form.reset()
+    reset() {
+      this.$refs.form.reset();
     },
-    resetValidation () {
-      this.$refs.form.resetValidation()
+    resetValidation() {
+      this.$refs.form.resetValidation();
     }
 
   },

@@ -53,7 +53,7 @@ export default {
     box-shadow: 0px 0px 20px #ccc !important;
     margin: 20px auto;
     font-size: 18px;
-    font-weight: 800;
+    font-weight: 500;
     height: 40px !important;
 
     &.dark {
@@ -61,5 +61,6 @@ export default {
       color: #fff; 
     }
   }
+
 
 </style>
