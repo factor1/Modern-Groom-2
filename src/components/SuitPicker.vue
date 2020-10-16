@@ -37,50 +37,41 @@
         <v-col cols="12" sm="12" md="12">
           <h2>Send Us Your Info</h2>
 
-          <!-- {{ fullSuit }} -->
+            <v-form
+                ref="form"
+                v-model="valid"
+                lazy-validation
+              >
+                <v-text-field
+                  v-model="name"
+                  :rules="nameRules"
+                  label="Full Name"
+                  required
+                ></v-text-field>
 
+                <v-text-field
+                  v-model="email"
+                  :rules="emailRules"
+                  label="E-mail"
+                  required
+                ></v-text-field>
 
+                <v-text-field
+                  v-model="phone"
+                  :rules="nameRules"
+                  label="Phone"
+                  required
+                ></v-text-field>
 
+                <v-select
+                  v-model="select"
+                  :items="states"
+                  :rules="[v => !!v || 'Item is required']"
+                  label="State"
+                  required
+                ></v-select>
 
-<v-form
-    ref="form"
-    v-model="valid"
-    lazy-validation
-  >
-    <v-text-field
-      v-model="name"
-      :rules="nameRules"
-      label="Full Name"
-      required
-    ></v-text-field>
-
-    <v-text-field
-      v-model="email"
-      :rules="emailRules"
-      label="E-mail"
-      required
-    ></v-text-field>
-
-    <v-text-field
-      v-model="phone"
-      :rules="nameRules"
-      label="Phone"
-      required
-    ></v-text-field>
-
-    <v-select
-      v-model="select"
-      :items="states"
-      :rules="[v => !!v || 'Item is required']"
-      label="State"
-      required
-    ></v-select>
-
-  </v-form>
-
-
-
-
+              </v-form>
 
         </v-col>
         <v-btn depressed x-large @click="sendMail" class="dark">
@@ -95,7 +86,7 @@
 
 <script>
 // email
-import emailjs from 'emailjs-com';
+import { Email } from '../vendor/smtp';
 
 // Components
 import SuitPart from '../components/SuitPart';
@@ -152,13 +143,22 @@ export default {
     updateTie(index){
       this.suitCombo.tie = index;
     },
-    sendMail(e) {
-      emailjs.sendForm('service_pov9bb3', 'template_wlzqobw', e.target, 'user_tsnDjr2jHAHvOMAU4gLNe')
-      .then((result) => {
-          console.log('SUCCESS!', result.status, result.text);
-      }, (error) => {
-          console.log('FAILED...', error);
-      });
+    sendMail() {
+
+      const token = '82bf2dac-8dc0-4ae2-a195-f9dc55d90648';
+
+      const html = `<h2>Quote request</h2><div><h3>Clients data:</h3><p><br> <b>Name: </b> ${this.name} <br> <b>Email: </b> ${this.email} <br> <b>State: </b> ${this.select} <br> <b>Phone: </b> ${this.phone} </p> <h3>Suit data:</h3><p> Suit: </b> ${this.fullSuit.suit.name} <br> Shirt: </b> ${this.fullSuit.shirt.name} <br> Tie type: </b> ${this.fullSuit.tie.name} <br> Tie type: </b> ${this.fullSuit.color.name} </p></div>`;
+
+      Email.send({
+        SecureToken : token,
+        To : 'jorgeparraandrade@gmail.com',
+        From : "jorgeparraandrade@gmail.com",
+        Subject : "Suit quote request",
+        Body : html
+      }).then(
+        message => alert(message)
+      );
+
     },
 
     validate () {
