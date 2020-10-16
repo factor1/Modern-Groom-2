@@ -13,6 +13,19 @@
 export default {
   name: 'App',
 
+  metaInfo() {
+    return { 
+      title: "MG2",
+      meta: [
+        { name: 'description', content:  'Description tag'},
+        { property: 'og:title', content: "title"},
+        { property: 'og:site_name', content: 'MG2'},
+        { property: 'og:type', content: 'website'},    
+        { name: 'robots', content: 'index,follow'}
+      ]
+    }
+  },
+
   data: () => ({
     //
   }),
