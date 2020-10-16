@@ -11,14 +11,15 @@
             class="px-0"
             fluid
           >
-            <v-radio-group v-model="radioGroup">
-              <v-radio
-                v-for="(type, index) in data.types"
-                :key="type.name"
-                :label="type.name"
-                :value="index"
-              ></v-radio>
-            </v-radio-group>
+
+          <div class="check-container">
+            <div :class="{'custom-check':true, 'active': radioGroup == index}" v-for="(type, index) in data.types" @click="radioGroup = index" :key="type.name" >
+              <div class="icon-container">
+                <v-icon mdi-check x-large v-show="radioGroup == index">mdi-check</v-icon>  
+              </div>
+              {{ type.name }}
+            </div>
+          </div>
 
           </v-container>
         </template>
@@ -34,6 +35,7 @@
         </div>
       </div>
     </div>
+    <p class="quote"><i>Swipe for color options</i></p>
   </div>
 </template>
 
@@ -70,9 +72,11 @@ export default {
 
 <style lang="scss" scoped>
 
+$blue: #22394d;
+
 .suit-container {
-  margin: 50px 0;
-  padding: 50px 0;
+  margin: 0 0;
+  padding: 20px 0;
 }
 
 .suit-frame {
@@ -96,30 +100,68 @@ export default {
     }
 
   }
+
+  .check-container {
+    display: flex;
+    justify-content: space-evenly;
+
+    .custom-check {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .icon-container {
+        font-size: 40px;
+        border: 1px solid $blue;
+        border-radius: 10px;
+        width: 35px;
+        height: 35px;
+        margin-right: 20px;
+        i {
+          font-size: 25px !important;
+          top: -18px;
+          color: #fff;
+        }
+      }
+      &.active {
+        .icon-container {
+          background-color: $blue;
+        }
+      }
+    }
+
+  }
 }
 
 .tie-container {
   overflow-x: scroll;
 }
 
+.quote {
+  margin: 10px 0;
+  color: #ccc;
+  font-weight: 300;
+}
+
 .tie-colors {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 4300px;
+  width: 3200px;
 
   &__single-colors {
-    min-width: 200px;
+    min-width: 137px;
     min-height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 5px solid;
+    border: 8px solid;
     margin: 7px;
+    font-size: 11px;
     cursor: pointer;
 
     &.active {
-      border-color: blue !important;
+      border-color: #3a678d !important;
     }
 
     .is-dark {

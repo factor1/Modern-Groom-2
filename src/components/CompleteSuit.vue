@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>View my suit</h1>
+    <h2>View my suit</h2>
     <div class="full-suit-comp">
       <img class="full-suit-comp__base-image" :src="suit.shirt.part" alt="shirt">
       <div class="tie-component" :style="`background-image: url(${suit.tie.part})`">
@@ -13,7 +13,7 @@
     <div class="suit-controls">
       <div>
         <p class="suit-controls__suit-data">
-          Your selections <br>
+          Your selections <v-icon small>mdi-chevron-down</v-icon> <br>
           {{ suit.suit.name }} Suit<br>
           {{ suit.shirt.name }} Shirt<br>
           {{ suit.tie.name }}<br>
@@ -22,12 +22,16 @@
       </div>
       <hr>
       <input type="hidden" id="testing-code">
-      <v-btn depressed x-large @click="returnEdit(1)">
-        Edit suit
-      </v-btn>
-      <v-btn depressed x-large @click="shareURL()">
-        Share suit
-      </v-btn>
+      <div class="buttons-container">
+        <div class="button-box" @click="returnEdit(1)">
+          <v-icon x-large>mdi-pencil</v-icon>
+          Edit suit
+        </div>
+        <div class="button-box" @click="shareURL()">
+          <v-icon x-large>mdi-upload-outline</v-icon>
+          Share suit
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -95,8 +99,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  $blue: #22394d;
+
   .full-suit-comp {
     position: relative;
+    margin: 20px 0;
 
     &__base-image {
       position: relative !important;
@@ -131,6 +138,21 @@ export default {
   .suit-controls {
     &__suit-data {
       text-align: center;
+    }
+  }
+
+  .buttons-container {
+    display: flex;
+    justify-content: space-around;
+
+    .button-box {
+      display: flex;
+      flex-direction: column;
+      color: $blue;
+
+      i {
+        color: $blue;
+      }
     }
   }
 </style>

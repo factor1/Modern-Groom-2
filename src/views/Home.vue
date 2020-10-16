@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <v-container class="mb-6">
-      <v-row align="start" no-gutters style="height: 150px;">
+    <v-container class="mb-6 pa-10 text-center">
+      <v-row align="start" >
         <v-col cols="12" sm="12" md="4">
           <v-img
             lazy-src="../assets/img/welcome.png"

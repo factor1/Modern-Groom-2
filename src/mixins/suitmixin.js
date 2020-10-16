@@ -36,10 +36,10 @@ export default {
   data: () => ({
     suits: [
       { name: 'Black', color: '#000000', file: blackSuit, part: blackSuitPart },
-      { name: 'MG Blue', color: '#17202f', file: mgSuit, part: mgSuitPart },
-      { name: 'Charcoal Grey', color: '#222222', file: darkGray, part: darkGraySuitPart },
-      { name: 'Navy', color: '#05051e', file: navy, part: navySuitPart },
-      { name: 'Silver', color: '#a3a0a3', file: silver, part: silverSuitPart }
+      { name: 'MG Blue', color: '#4a537a', file: mgSuit, part: mgSuitPart },
+      { name: 'Charcoal Grey', color: '#5e5a61', file: darkGray, part: darkGraySuitPart },
+      { name: 'Navy', color: '#313042', file: navy, part: navySuitPart },
+      { name: 'Silver', color: '#c1bac2', file: silver, part: silverSuitPart }
     ],
     shirts: [
       { name: 'White', color: '#f0f0f0', file: whiteShirt, part: whiteShirtPart },
@@ -755,7 +755,23 @@ export default {
           }
         },
       ],
-    }
+    },
+    states: [
+      'Alabama', 'Alaska', 'American Samoa', 'Arizona',
+      'Arkansas', 'California', 'Colorado', 'Connecticut',
+      'Delaware', 'District of Columbia', 'Federated States of Micronesia',
+      'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho',
+      'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
+      'Louisiana', 'Maine', 'Marshall Islands', 'Maryland',
+      'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
+      'Missouri', 'Montana', 'Nebraska', 'Nevada',
+      'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
+      'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio',
+      'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico',
+      'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee',
+      'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia',
+      'Washington', 'West Virginia', 'Wisconsin', 'Wyoming',
+    ],
   }),
 
   computed: {
