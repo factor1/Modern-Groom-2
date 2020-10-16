@@ -45,20 +45,20 @@ export default {
     margin: 40px 0;
   }
 
-  .v-btn.theme--light {
-    background-color: white;
-    border-radius: 0;
-    color: $blue;
+  .groom-btn {
+    background-color: white !important;
+    border-radius: 0 !important;
+    color: $blue !important;
     padding: 10px 80px !important;
     box-shadow: 0px 0px 20px #ccc !important;
-    margin: 20px auto;
+    margin: 20px auto !important;
     font-size: 18px;
     font-weight: 500;
     height: 40px !important;
 
     &.dark {
       background-color: $blue !important;
-      color: #fff; 
+      color: #fff !important; 
     }
   }
 

@@ -6,35 +6,40 @@
         <v-col cols="12" sm="12" md="12">
           <h2>Build My Suit</h2>
         </v-col>
-        <v-col cols="12" sm="12" md="4">
+        <v-col cols="12" sm="12" md="4" offset-md="4">
           <SuitPart :data="suits" title="Suit Swatches" :active="suitCombo.suit" @updateInfo="updateSuit($event)" />
         </v-col>
-        <v-col cols="12" sm="12" md="4">
+        <v-col cols="12" sm="12" md="4" offset-md="4">
           <SuitPart :data="shirts" title="Shirt Swatches" :active="suitCombo.shirt" @updateInfo="updateShirt($event)" />
         </v-col>
-        <v-col cols="12" sm="12" md="4">
+        <v-col cols="12" sm="12" md="4" offset-md="4">
           <SuitTie :data="ties" :selectedcolor="suitCombo.color" :selectedtie="suitCombo.tie" @updateColor="setColor($event)" @tieUpdate="updateTie($event)" />
         </v-col>
+        <v-col cols="12" sm="12" md="12">
+          <v-btn depressed x-large @click="step = 2" class="groom-btn">
+            Build my suit
+          </v-btn>
+        </v-col>
       </v-row>
-      <v-btn depressed x-large @click="step = 2">
-        Build my suit
-      </v-btn>
+
     </v-container>
 
     <v-container class="mb-6 pa-10 text-center" v-if="step == 2">
       <v-row align="start" no-gutters>
-        <v-col cols="12" sm="12" md="12">
+        <v-col cols="12" sm="12" md="4" offset-md="4">
           <CompleteSuit :suit="fullSuit" :suitID="suitCombo" @goto=" step = $event "/>
         </v-col>
-        <v-btn depressed x-large @click="step = 3" class="dark">
-          Get Quote
-        </v-btn>
+        <v-col cols="12" sm="12" md="12">
+          <v-btn depressed x-large @click="step = 3" class="groom-btn dark">
+            Get Quote
+          </v-btn>
+        </v-col>
       </v-row>
     </v-container>
 
     <v-container class="mb-6 pa-10 text-center" v-if="step == 3">
       <v-row align="start" no-gutters>
-        <v-col cols="12" sm="12" md="12">
+        <v-col cols="12" sm="12" md="4" offset-md="4">
           <h2>Send Us Your Info</h2>
 
             <v-form
@@ -75,12 +80,41 @@
                   required
                 ></v-select>
 
+                <v-menu
+                  ref="menu1"
+                  :close-on-content-click="false"
+                  transition="scale-transition"
+                  offset-y
+                  max-width="290px"
+                  min-width="290px"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-text-field
+                      v-model="date"
+                      label="Date"
+                      persistent-hint
+                      v-bind="attrs"
+                      v-on="on"
+                      color=" #22394d"
+                      :rules="dateRules"
+                      required
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker
+                    v-model="date"
+                    no-title
+                  ></v-date-picker>
+                </v-menu>
+
               </v-form>
 
         </v-col>
-        <v-btn depressed x-large @click="sendMail" class="dark">
-          send
-        </v-btn>
+        <v-col cols="12" sm="12" md="12">
+          <v-btn depressed x-large @click="sendMail" class="groom-btn dark">
+            send
+          </v-btn>
+        </v-col>
+
       </v-row>
     </v-container>
 
@@ -127,6 +161,10 @@ export default {
     phone:'',
     phoneRules: [
       v => !!v || 'Phone is required'
+    ],
+    date:'',
+    dateRules: [
+      v => !!v || 'Date is required'
     ]
   }),
 
@@ -156,7 +194,7 @@ export default {
       if(this.valid) {
         const token = '82bf2dac-8dc0-4ae2-a195-f9dc55d90648';
 
-        const html = `<h2>Quote request</h2><div><h3>Clients data:</h3><p><b>Name: </b> ${this.name} <br> <b>Email: </b> ${this.email} <br> <b>State: </b> ${this.select} <br> <b>Phone: </b> ${this.phone} </p> <h3>Suit data:</h3><p> Suit: </b> ${this.fullSuit.suit.name} <br> Shirt: </b> ${this.fullSuit.shirt.name} <br> Tie type: </b> ${this.fullSuit.tie.name} <br> Tie type: </b> ${this.fullSuit.color.name} </p></div>`;
+        const html = `<h2>Quote request</h2><div><h3>Clients data:</h3><p><b>Name: </b> ${this.name} <br> <b>Email: </b> ${this.email} <br> <b>State: </b> ${this.select} <br> <b>Phone: </b> ${this.phone} <br> <b>Phone: </b> ${this.date} </p> <h3>Suit data:</h3><p> Suit: </b> ${this.fullSuit.suit.name} <br> Shirt: </b> ${this.fullSuit.shirt.name} <br> Tie type: </b> ${this.fullSuit.tie.name} <br> Tie color: </b> ${this.fullSuit.color.name} <br> Suit build: </b> ${this.shareUrl} </p></div>`;
 
         Email.send({
           SecureToken : token,
@@ -182,6 +220,15 @@ export default {
       this.$refs.form.resetValidation();
     }
 
+  },
+
+  computed: {
+    shareUrl(){
+      let currentUrl = window.location.href;
+      currentUrl = currentUrl.indexOf('?') < 0 ? currentUrl : currentUrl.substring(0, currentUrl.indexOf('?'));
+      currentUrl = currentUrl +`?suit=${this.suitCombo.suit}&shirt=${this.suitCombo.shirt}&tie=${this.suitCombo.tie}&color=${this.suitCombo.color}`;
+      return currentUrl;
+    }
   },
 
   beforeMount() {
