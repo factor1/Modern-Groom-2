@@ -26,8 +26,8 @@ export default {
 <style lang="scss" scoped>
 
 .suit-container {
-  margin: 50px 0;
-  padding: 50px 0;
+  margin: 0 0;
+  padding: 20px 0;
 }
 
 .suit-frame {
@@ -39,15 +39,16 @@ export default {
 .suit-options {
   display: flex;
   justify-content: space-evenly;
+  margin: 30px 0px;
   &__option {
-    height: 20px;
-    width: 20px;
-    border: 2px solid #ffffff;
-    border-radius: 5px;
+    height: 35px;
+    width: 35px;
+    border: 4px solid #ffffff;
+    border-radius: 10px;
     cursor: pointer;
 
     &.active {
-      border-color: red;
+      border-color: #236096;
     }
 
   }

@@ -1,10 +1,10 @@
 <template>
   <div>
 
-    <v-container class="mb-6" v-show="step == 1">
+    <v-container class="mb-6 pa-10 text-center" v-if="step == 1">
       <v-row align="start" no-gutters>
         <v-col cols="12" sm="12" md="12">
-          <h1>Build my suit</h1>
+          <h2>Build My Suit</h2>
         </v-col>
         <v-col cols="12" sm="12" md="4">
           <SuitPart :data="suits" title="Suit Swatches" :active="suitCombo.suit" @updateInfo="updateSuit($event)" />
@@ -21,13 +21,70 @@
       </v-btn>
     </v-container>
 
-    <v-container class="mb-6" v-show="step == 2">
+    <v-container class="mb-6 pa-10 text-center" v-if="step == 2">
       <v-row align="start" no-gutters>
         <v-col cols="12" sm="12" md="12">
           <CompleteSuit :suit="fullSuit" :suitID="suitCombo" @goto=" step = $event "/>
         </v-col>
-        <v-btn depressed x-large @click="step = 3">
+        <v-btn depressed x-large @click="step = 3" class="dark">
           Get Quote
+        </v-btn>
+      </v-row>
+    </v-container>
+
+    <v-container class="mb-6 pa-10 text-center" v-if="step == 3">
+      <v-row align="start" no-gutters>
+        <v-col cols="12" sm="12" md="12">
+          <h2>Send Us Your Info</h2>
+
+          <!-- {{ fullSuit }} -->
+
+
+
+
+<v-form
+    ref="form"
+    v-model="valid"
+    lazy-validation
+  >
+    <v-text-field
+      v-model="name"
+      :rules="nameRules"
+      label="Full Name"
+      required
+    ></v-text-field>
+
+    <v-text-field
+      v-model="email"
+      :rules="emailRules"
+      label="E-mail"
+      required
+    ></v-text-field>
+
+    <v-text-field
+      v-model="phone"
+      :rules="nameRules"
+      label="Phone"
+      required
+    ></v-text-field>
+
+    <v-select
+      v-model="select"
+      :items="states"
+      :rules="[v => !!v || 'Item is required']"
+      label="State"
+      required
+    ></v-select>
+
+  </v-form>
+
+
+
+
+
+        </v-col>
+        <v-btn depressed x-large @click="sendMail" class="dark">
+          send
         </v-btn>
       </v-row>
     </v-container>
@@ -37,6 +94,8 @@
   
 
 <script>
+// email
+import emailjs from 'emailjs-com';
 
 // Components
 import SuitPart from '../components/SuitPart';
@@ -45,6 +104,7 @@ import CompleteSuit from '../components/CompleteSuit';
 
 // mixin
 import suitMixin from '../mixins/suitmixin';
+
 
 export default {
 
@@ -56,8 +116,21 @@ export default {
       suit:0,
       shirt:0,
       tie:0,
-      color: 0
+      color: 0,
     },
+    valid: true,
+    name: '',
+    nameRules: [  
+      v => !!v || 'Name is required',
+      v => (v && v.length <= 10) || 'Name must be less than 10 characters',
+    ],
+    email: '',
+    emailRules: [
+      v => !!v || 'E-mail is required',
+      v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+    ],
+    select: null,
+    phone:''
   }),
 
   components: {
@@ -78,7 +151,26 @@ export default {
     },
     updateTie(index){
       this.suitCombo.tie = index;
+    },
+    sendMail(e) {
+      emailjs.sendForm('service_pov9bb3', 'template_wlzqobw', e.target, 'user_tsnDjr2jHAHvOMAU4gLNe')
+      .then((result) => {
+          console.log('SUCCESS!', result.status, result.text);
+      }, (error) => {
+          console.log('FAILED...', error);
+      });
+    },
+
+    validate () {
+      this.$refs.form.validate()
+    },
+    reset () {
+      this.$refs.form.reset()
+    },
+    resetValidation () {
+      this.$refs.form.resetValidation()
     }
+
   },
 
   beforeMount() {
