@@ -153,24 +153,22 @@ export default {
       
       this.validate(); 
 
-      console.log(validate);
+      if(this.valid) {
+        const token = '82bf2dac-8dc0-4ae2-a195-f9dc55d90648';
 
-      // if(valid) {
-      //   const token = '82bf2dac-8dc0-4ae2-a195-f9dc55d90648';
+        const html = `<h2>Quote request</h2><div><h3>Clients data:</h3><p><b>Name: </b> ${this.name} <br> <b>Email: </b> ${this.email} <br> <b>State: </b> ${this.select} <br> <b>Phone: </b> ${this.phone} </p> <h3>Suit data:</h3><p> Suit: </b> ${this.fullSuit.suit.name} <br> Shirt: </b> ${this.fullSuit.shirt.name} <br> Tie type: </b> ${this.fullSuit.tie.name} <br> Tie type: </b> ${this.fullSuit.color.name} </p></div>`;
 
-      //   const html = `<h2>Quote request</h2><div><h3>Clients data:</h3><p><b>Name: </b> ${this.name} <br> <b>Email: </b> ${this.email} <br> <b>State: </b> ${this.select} <br> <b>Phone: </b> ${this.phone} </p> <h3>Suit data:</h3><p> Suit: </b> ${this.fullSuit.suit.name} <br> Shirt: </b> ${this.fullSuit.shirt.name} <br> Tie type: </b> ${this.fullSuit.tie.name} <br> Tie type: </b> ${this.fullSuit.color.name} </p></div>`;
+        Email.send({
+          SecureToken : token,
+          To : 'jorgeparraandrade@gmail.com',
+          From : "jorgeparraandrade@gmail.com",
+          Subject : "Suit quote request",
+          Body : html
+        }).then(
+          message => alert(message)
+        );
 
-      //   Email.send({
-      //     SecureToken : token,
-      //     To : 'jorgeparraandrade@gmail.com',
-      //     From : "jorgeparraandrade@gmail.com",
-      //     Subject : "Suit quote request",
-      //     Body : html
-      //   }).then(
-      //     message => alert(message)
-      //   );
-
-      // }
+      }
 
     },
 
