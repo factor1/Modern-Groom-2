@@ -76,7 +76,7 @@ $blue: #22394d;
 
 .suit-container {
   margin: 0 0;
-  padding: 20px 0;
+  padding: 20px 0 10px;
 }
 
 .suit-frame {
