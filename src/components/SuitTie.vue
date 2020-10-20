@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="suit-container">
-      <div class="suit-frame">
+      <div class="suit-frame" v-if="false">
         <img class="suit-frame__image" :src="data.types[selectedtie].file" alt="suit">
       </div>
       <h2>Tie Types</h2>
@@ -117,6 +117,7 @@ $blue: #22394d;
         width: 35px;
         height: 35px;
         margin-right: 20px;
+        cursor: pointer;
         i {
           font-size: 25px !important;
           top: -18px;

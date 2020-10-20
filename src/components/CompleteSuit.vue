@@ -4,7 +4,7 @@
     <div class="full-suit-comp">
       <img class="full-suit-comp__base-image" :src="suit.shirt.part" alt="shirt">
       <div class="tie-component" :style="`background-image: url(${suit.tie.part})`">
-        <BowTieComp v-if="suit.tie.name === 'Bowtie'"/>
+        <BowTieComp v-if="suit.tie.name === 'Bow tie'"/>
         <NeckTieComp v-else/>
       </div>
       <img :src="suit.suit.part" alt="suit">
