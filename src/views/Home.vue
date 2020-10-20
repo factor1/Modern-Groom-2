@@ -2,12 +2,12 @@
   <div class="home">
     <v-container class="mb-6 pa-10 text-center">
       <v-row align="start" >
-        <v-col cols="12" sm="12" md="4">
+        <v-col cols="12" sm="12" md="4" offset-md="4">
           <v-img
             lazy-src="../assets/img/welcome.png"
             src="../assets/img/welcome.png"
           ></v-img>
-          <v-btn depressed x-large to="/suit">
+          <v-btn depressed x-large to="/suit" class="groom-btn">
             Get started
           </v-btn>
         </v-col>

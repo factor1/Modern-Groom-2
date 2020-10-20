@@ -48,8 +48,8 @@ export default {
     ],
     ties: {
       types: [
-        { name: 'Bowtie', file: bowTie, part: bowTiePart },
-        { name: 'Necktie', file: neckTie, part: neckTiePart }
+        { name: 'Bow tie', file: bowTie, part: bowTiePart },
+        { name: 'Neck tie', file: neckTie, part: neckTiePart }
       ],
       colors: [
         {

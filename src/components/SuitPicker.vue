@@ -6,86 +6,115 @@
         <v-col cols="12" sm="12" md="12">
           <h2>Build My Suit</h2>
         </v-col>
-        <v-col cols="12" sm="12" md="4">
+        <v-col cols="12" sm="12" md="4" offset-md="4">
           <SuitPart :data="suits" title="Suit Swatches" :active="suitCombo.suit" @updateInfo="updateSuit($event)" />
         </v-col>
-        <v-col cols="12" sm="12" md="4">
-          <SuitPart :data="shirts" title="Shirt Swatches" :active="suitCombo.shirt" @updateInfo="updateShirt($event)" />
+        <v-col cols="12" sm="12" md="4" offset-md="4">
+          <SuitPart :data="shirts" title="Shirt Swatches" :active="suitCombo.shirt" :nothumbnail="true" @updateInfo="updateShirt($event)" />
         </v-col>
-        <v-col cols="12" sm="12" md="4">
+        <v-col cols="12" sm="12" md="4" offset-md="4">
           <SuitTie :data="ties" :selectedcolor="suitCombo.color" :selectedtie="suitCombo.tie" @updateColor="setColor($event)" @tieUpdate="updateTie($event)" />
         </v-col>
+        <v-col cols="12" sm="12" md="12">
+          <v-btn depressed x-large @click="step = 2" class="groom-btn">
+            Build my suit
+          </v-btn>
+        </v-col>
       </v-row>
-      <v-btn depressed x-large @click="step = 2">
-        Build my suit
-      </v-btn>
+
     </v-container>
 
     <v-container class="mb-6 pa-10 text-center" v-if="step == 2">
       <v-row align="start" no-gutters>
-        <v-col cols="12" sm="12" md="12">
+        <v-col cols="12" sm="12" md="4" offset-md="4">
           <CompleteSuit :suit="fullSuit" :suitID="suitCombo" @goto=" step = $event "/>
         </v-col>
-        <v-btn depressed x-large @click="step = 3" class="dark">
-          Get Quote
-        </v-btn>
+        <v-col cols="12" sm="12" md="12">
+          <v-btn depressed x-large @click="step = 3" class="groom-btn dark">
+            Get Quote
+          </v-btn>
+        </v-col>
       </v-row>
     </v-container>
 
     <v-container class="mb-6 pa-10 text-center" v-if="step == 3">
       <v-row align="start" no-gutters>
-        <v-col cols="12" sm="12" md="12">
+        <v-col cols="12" sm="12" md="4" offset-md="4">
           <h2>Send Us Your Info</h2>
 
-          <!-- {{ fullSuit }} -->
+            <v-form
+                ref="form"
+                v-model="valid"
+                lazy-validation
+              >
+                <v-text-field
+                  v-model="name"
+                  :rules="nameRules"
+                  label="Full Name"
+                  color=" #22394d"
+                  required
+                ></v-text-field>
 
+                <v-text-field
+                  v-model="email"
+                  :rules="emailRules"
+                  label="E-mail"
+                  color=" #22394d"
+                  required
+                ></v-text-field>
 
+                <v-text-field
+                  v-model="phone"
+                  :rules="phoneRules"
+                  label="Phone"
+                  color=" #22394d"
+                  required
+                ></v-text-field>
 
+                <v-select
+                  v-model="select"
+                  :items="states"
+                  :rules="[v => !!v || 'Item is required']"
+                  label="State"
+                  color=" #22394d"
+                  required
+                ></v-select>
 
-<v-form
-    ref="form"
-    v-model="valid"
-    lazy-validation
-  >
-    <v-text-field
-      v-model="name"
-      :rules="nameRules"
-      label="Full Name"
-      required
-    ></v-text-field>
+                <v-menu
+                  ref="menu1"
+                  :close-on-content-click="false"
+                  transition="scale-transition"
+                  offset-y
+                  max-width="290px"
+                  min-width="290px"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-text-field
+                      v-model="date"
+                      label="Date"
+                      persistent-hint
+                      v-bind="attrs"
+                      v-on="on"
+                      color=" #22394d"
+                      :rules="dateRules"
+                      required
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker
+                    v-model="date"
+                    no-title
+                  ></v-date-picker>
+                </v-menu>
 
-    <v-text-field
-      v-model="email"
-      :rules="emailRules"
-      label="E-mail"
-      required
-    ></v-text-field>
-
-    <v-text-field
-      v-model="phone"
-      :rules="nameRules"
-      label="Phone"
-      required
-    ></v-text-field>
-
-    <v-select
-      v-model="select"
-      :items="states"
-      :rules="[v => !!v || 'Item is required']"
-      label="State"
-      required
-    ></v-select>
-
-  </v-form>
-
-
-
-
+              </v-form>
 
         </v-col>
-        <v-btn depressed x-large @click="sendMail" class="dark">
-          send
-        </v-btn>
+        <v-col cols="12" sm="12" md="12">
+          <v-btn depressed x-large @click="sendMail" class="groom-btn dark">
+            send
+          </v-btn>
+        </v-col>
+
       </v-row>
     </v-container>
 
@@ -95,7 +124,7 @@
 
 <script>
 // email
-import emailjs from 'emailjs-com';
+import { Email } from '../vendor/smtp';
 
 // Components
 import SuitPart from '../components/SuitPart';
@@ -118,11 +147,10 @@ export default {
       tie:0,
       color: 0,
     },
-    valid: true,
+    valid: false,
     name: '',
     nameRules: [  
       v => !!v || 'Name is required',
-      v => (v && v.length <= 10) || 'Name must be less than 10 characters',
     ],
     email: '',
     emailRules: [
@@ -130,7 +158,14 @@ export default {
       v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
     ],
     select: null,
-    phone:''
+    phone:'',
+    phoneRules: [
+      v => !!v || 'Phone is required'
+    ],
+    date:'',
+    dateRules: [
+      v => !!v || 'Date is required'
+    ]
   }),
 
   components: {
@@ -152,25 +187,48 @@ export default {
     updateTie(index){
       this.suitCombo.tie = index;
     },
-    sendMail(e) {
-      emailjs.sendForm('service_pov9bb3', 'template_wlzqobw', e.target, 'user_tsnDjr2jHAHvOMAU4gLNe')
-      .then((result) => {
-          console.log('SUCCESS!', result.status, result.text);
-      }, (error) => {
-          console.log('FAILED...', error);
-      });
+    sendMail() {
+      
+      this.validate(); 
+
+      if(this.valid) {
+        const token = '82bf2dac-8dc0-4ae2-a195-f9dc55d90648';
+
+        const html = `<h2>Quote request</h2><div><h3>Clients data:</h3><p><b>Name: </b> ${this.name} <br> <b>Email: </b> ${this.email} <br> <b>State: </b> ${this.select} <br> <b>Phone: </b> ${this.phone} <br> <b>Phone: </b> ${this.date} </p> <h3>Suit data:</h3><p> Suit: </b> ${this.fullSuit.suit.name} <br> Shirt: </b> ${this.fullSuit.shirt.name} <br> Tie type: </b> ${this.fullSuit.tie.name} <br> Tie color: </b> ${this.fullSuit.color.name} <br> Suit build: </b> ${this.shareUrl} </p></div>`;
+
+        Email.send({
+          SecureToken : token,
+          To : 'jorgeparraandrade@gmail.com',
+          From : "jorgeparraandrade@gmail.com",
+          Subject : "Suit quote request",
+          Body : html
+        }).then(
+          message => alert(message)
+        );
+
+      }
+
     },
 
-    validate () {
-      this.$refs.form.validate()
+    validate() {
+      this.$refs.form.validate();
     },
-    reset () {
-      this.$refs.form.reset()
+    reset() {
+      this.$refs.form.reset();
     },
-    resetValidation () {
-      this.$refs.form.resetValidation()
+    resetValidation() {
+      this.$refs.form.resetValidation();
     }
 
+  },
+
+  computed: {
+    shareUrl(){
+      let currentUrl = window.location.href;
+      currentUrl = currentUrl.indexOf('?') < 0 ? currentUrl : currentUrl.substring(0, currentUrl.indexOf('?'));
+      currentUrl = currentUrl +`?suit=${this.suitCombo.suit}&shirt=${this.suitCombo.shirt}&tie=${this.suitCombo.tie}&color=${this.suitCombo.color}`;
+      return currentUrl;
+    }
   },
 
   beforeMount() {
