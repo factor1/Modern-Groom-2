@@ -1,10 +1,56 @@
 <template>
   <v-app>
+    <v-app-bar
+      app
+      color="#0e2942"
+      flat
+      height="80"
+    >
+      <div class="d-flex align-center">
+        <v-img
+          alt="The Modern Groom"
+          class="shrink m-4"
+          contain
+          src="../src/assets/img/whitelogo.png"
+          transition="scale-transition"
+          width="220"
+        />
+
+      </div>
+
+      <v-spacer></v-spacer>
+
+      <v-btn
+        href="https://themoderngroom.com/"
+        target="_self"
+        text
+        class="groom-btn nav"
+      >
+        <v-icon>mdi-home</v-icon>
+      </v-btn>
+    </v-app-bar>
     <v-main>
       <transition mode="out-in">
         <router-view></router-view>
       </transition>
     </v-main>
+
+    <v-card>
+      <v-footer class="pa-0">
+        <v-card
+          flat
+          tile
+          width="100%"
+          class="text-center"
+          color="#0e2942"
+        >
+          <v-card-text class="white--text">
+            <strong>© {{ new Date().getFullYear() }} The Modern Groom</strong>
+          </v-card-text>
+        </v-card>
+      </v-footer>
+    </v-card>
+
   </v-app>
 </template>
 
@@ -59,6 +105,11 @@ export default {
     &.dark {
       background-color: $blue !important;
       color: #fff !important; 
+    }
+
+    &.nav {
+      box-shadow: none !important;
+      padding: 10px 20px !important;
     }
   }
 
