@@ -91,7 +91,7 @@
                   <template v-slot:activator="{ on, attrs }">
                     <v-text-field
                       v-model="date"
-                      label="Date"
+                      label="Wedding Date"
                       persistent-hint
                       v-bind="attrs"
                       v-on="on"

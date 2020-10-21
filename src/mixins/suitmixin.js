@@ -37,9 +37,9 @@ export default {
     suits: [
       { name: 'Black', color: '#000000', file: blackSuit, part: blackSuitPart },
       { name: 'MG Blue', color: '#4a537a', file: mgSuit, part: mgSuitPart },
-      { name: 'Charcoal Grey', color: '#5e5a61', file: darkGray, part: darkGraySuitPart },
+      { name: 'Charcoal', color: '#5e5a61', file: darkGray, part: darkGraySuitPart },
       { name: 'Navy', color: '#313042', file: navy, part: navySuitPart },
-      { name: 'Silver', color: '#c1bac2', file: silver, part: silverSuitPart }
+      { name: 'Light Grey', color: '#c1bac2', file: silver, part: silverSuitPart }
     ],
     shirts: [
       { name: 'White', color: '#f0f0f0', file: whiteShirt, part: whiteShirtPart },
