@@ -3,7 +3,7 @@ module.exports = {
     "vuetify"
   ],
 
-  publicPath: '',
+  publicPath: './',
   
   chainWebpack: (config) => {
     const svgRule = config.module.rule('svg');
