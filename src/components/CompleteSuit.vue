@@ -101,6 +101,10 @@ export default {
 <style lang="scss" scoped>
   $blue: #22394d;
 
+  hr {
+    margin: 30px 0;
+  }
+
   .full-suit-comp {
     position: relative;
     margin: 20px 0;

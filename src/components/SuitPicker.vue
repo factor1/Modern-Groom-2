@@ -7,10 +7,10 @@
           <h2>Build My Suit</h2>
         </v-col>
         <v-col cols="12" sm="12" md="4" offset-md="4">
-          <SuitPart :data="suits" title="Suit Swatches" :active="suitCombo.suit" @updateInfo="updateSuit($event)" />
+          <SuitPart :data="suits" title="Select Suit Color" :active="suitCombo.suit" @updateInfo="updateSuit($event)" />
         </v-col>
         <v-col cols="12" sm="12" md="4" offset-md="4">
-          <SuitPart :data="shirts" title="Shirt Swatches" :active="suitCombo.shirt" :nothumbnail="true" @updateInfo="updateShirt($event)" />
+          <SuitPart :data="shirts" title="Select Shirt color" :active="suitCombo.shirt" :nothumbnail="true" @updateInfo="updateShirt($event)" />
         </v-col>
         <v-col cols="12" sm="12" md="4" offset-md="4">
           <SuitTie :data="ties" :selectedcolor="suitCombo.color" :selectedtie="suitCombo.tie" @updateColor="setColor($event)" @tieUpdate="updateTie($event)" />
