@@ -13,9 +13,9 @@
           >
 
           <div class="check-container">
-            <div :class="{'custom-check':true, 'active': radioGroup == index}" v-for="(type, index) in data.types" @click="radioGroup = index" :key="type.name" >
+            <div :class="{'custom-check':true, 'active': selectedtie == index}" v-for="(type, index) in data.types" @click="updateTie(index)" :key="type.name" >
               <div class="icon-container">
-                <v-icon mdi-check x-large v-show="radioGroup == index">mdi-check</v-icon>  
+                <v-icon mdi-check x-large v-show="selectedtie == index">mdi-check</v-icon>  
               </div>
               {{ type.name }}
             </div>
@@ -41,16 +41,14 @@
 
 <script>
 export default {
-  data() {
-    return {
-      radioGroup: 0
-    }
-  },
   props:['data', 'selectedcolor', 'selectedtie'],
 
   methods: {
     updateColor(index) {
       this.$emit('updateColor', index);
+    },
+    updateTie(index) {
+      this.$emit('tieUpdate', index);
     },
     isDark: rgb => (
       Math.round(
@@ -62,11 +60,6 @@ export default {
     ),
   },
 
-  watch: {
-    'radioGroup': function() {
-      this.$emit('tieUpdate', this.radioGroup);
-    }
-  }
 }
 </script>
 

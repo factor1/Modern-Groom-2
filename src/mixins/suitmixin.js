@@ -9,7 +9,7 @@ import silver from '../assets/img/preview/silver.jpg';
 import blackSuitPart from '../assets/img/suits/Black.png';
 import mgSuitPart from '../assets/img/suits/Blue.png';
 import darkGraySuitPart from '../assets/img/suits/DarkGray.png';
-import navySuitPart from '../assets/img/suits/Navy.png';
+import navySuitPart from '../assets/img/suits/Navy_2020.png';
 import silverSuitPart from '../assets/img/suits/Silver.png';
 
 // Shirts
