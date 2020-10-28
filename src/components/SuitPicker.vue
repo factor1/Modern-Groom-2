@@ -192,18 +192,18 @@ export default {
       this.validate(); 
 
       if(this.valid) {
-        const token = '82bf2dac-8dc0-4ae2-a195-f9dc55d90648';
+        const token = process.env.VUE_APP_SMTP_TOKEN;
 
         const html = `<h2>Quote request</h2><div><h3>Clients data:</h3><p><b>Name: </b> ${this.name} <br> <b>Email: </b> ${this.email} <br> <b>State: </b> ${this.select} <br> <b>Phone: </b> ${this.phone} <br> <b>Phone: </b> ${this.date} </p> <h3>Suit data:</h3><p> Suit: </b> ${this.fullSuit.suit.name} <br> Shirt: </b> ${this.fullSuit.shirt.name} <br> Tie type: </b> ${this.fullSuit.tie.name} <br> Tie color: </b> ${this.fullSuit.color.name} <br> Suit build: </b> ${this.shareUrl} </p></div>`;
 
         Email.send({
           SecureToken : token,
-          To : 'jorgeparraandrade@gmail.com',
-          From : "jorgeparraandrade@gmail.com",
+          To : 'info@themoderngroom.com, development@factor1studios.com',
+          From : "no-reply@themoderngroom.com",
           Subject : "Suit quote request",
           Body : html
         }).then(
-          message => alert(message)
+          message => message == 'OK' ? alert('Message sent successfully') : alert(message)
         );
 
       }
