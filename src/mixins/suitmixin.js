@@ -9,7 +9,7 @@ import silver from '../assets/img/preview/silver.jpg';
 import blackSuitPart from '../assets/img/suits/Black.png';
 import mgSuitPart from '../assets/img/suits/Blue.png';
 import darkGraySuitPart from '../assets/img/suits/DarkGray.png';
-import navySuitPart from '../assets/img/suits/Navy.png';
+import navySuitPart from '../assets/img/suits/Navy_2020.png';
 import silverSuitPart from '../assets/img/suits/Silver.png';
 
 // Shirts
@@ -37,9 +37,9 @@ export default {
     suits: [
       { name: 'Black', color: '#000000', file: blackSuit, part: blackSuitPart },
       { name: 'MG Blue', color: '#4a537a', file: mgSuit, part: mgSuitPart },
-      { name: 'Charcoal Grey', color: '#5e5a61', file: darkGray, part: darkGraySuitPart },
+      { name: 'Charcoal', color: '#5e5a61', file: darkGray, part: darkGraySuitPart },
       { name: 'Navy', color: '#313042', file: navy, part: navySuitPart },
-      { name: 'Silver', color: '#c1bac2', file: silver, part: silverSuitPart }
+      { name: 'Light Grey', color: '#c1bac2', file: silver, part: silverSuitPart }
     ],
     shirts: [
       { name: 'White', color: '#f0f0f0', file: whiteShirt, part: whiteShirtPart },
