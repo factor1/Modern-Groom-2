@@ -198,7 +198,7 @@ export default {
 
         Email.send({
           SecureToken : token,
-          To : 'info@themoderngroom.com, development@factor1studios.com',
+          To : 'info@themoderngroom.com, development@factor1studios.com, 2pdk8xbz@robot.zapier.com, info.themoderngroom@gmail.com',
           From : "no-reply@themoderngroom.com",
           Subject : "Suit quote request",
           Body : html
