@@ -203,7 +203,14 @@ export default {
           Subject : "Suit quote request",
           Body : html
         }).then(
-          message => message == 'OK' ? alert('Message sent successfully') : alert(message)
+          message => {
+            if (message == 'OK') {
+              alert('Message sent successfully');
+              window.location.href = "https://themoderngroom.com/build-your-suit-thank-you"; 
+            } else {
+              alert(message);
+            }
+          }
         );
 
       }
