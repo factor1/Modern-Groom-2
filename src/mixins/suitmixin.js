@@ -30,6 +30,11 @@ import neckTie from '../assets/img/preview/necktie.jpg';
 import bowTiePart from '../assets/img/shirts_and_ties/Bowtie.png';
 import neckTiePart from '../assets/img/shirts_and_ties/Necktie.png';
 
+// Ties patterns
+import bowTiePattern1 from '../assets/img/patterns/Bowtie-pattern-1.png';
+import bowTiePattern2 from '../assets/img/patterns/Bowtie-pattern-2.png';
+import neckTiePattern1 from '../assets/img/patterns/Necktie-pattern-1.png';
+import neckTiePattern2 from '../assets/img/patterns/Necktie-pattern-2.png';
 
 export default {
 
@@ -755,22 +760,30 @@ export default {
           }
         },
       ],
+      patterns: [
+        { name: 'Solid color', type: 'Bow tie', file: bowTie, part: bowTiePart },
+        { name: 'pattern 1', type: 'Bow tie' , file: bowTiePattern1, part: bowTiePattern1 },
+        { name: 'pattern 2', type: 'Bow tie' , file: bowTiePattern2, part: bowTiePattern2 },
+        { name: 'Solid color', type: 'Neck tie', file: neckTie, part: neckTiePart },
+        { name: 'pattern 3', type: 'Neck tie', file: neckTiePattern1, part: neckTiePattern1 },
+        { name: 'pattern 4', type: 'Neck tie', file: neckTiePattern2, part: neckTiePattern2 },
+      ]
     },
     states: [
-      'Alabama', 'Alaska', 'American Samoa', 'Arizona',
-      'Arkansas', 'California', 'Colorado', 'Connecticut',
+      'Alabama', 'Alaska', 'Alberta','American Samoa', 'Arizona',
+      'Arkansas', 'British Columbia', 'California', 'Colorado', 'Connecticut',
       'Delaware', 'District of Columbia', 'Federated States of Micronesia',
       'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho',
       'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
-      'Louisiana', 'Maine', 'Marshall Islands', 'Maryland',
+      'Louisiana', 'Maine', 'Marshall Islands', 'Manitoba', 'Maryland',
       'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
-      'Missouri', 'Montana', 'Nebraska', 'Nevada',
-      'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
-      'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio',
-      'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico',
-      'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee',
+      'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Brunswick',
+      'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'Newfoundland and Labrador',
+      'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Northwest Territories', 'Nova Scotia', 'Nunavut', 'Ohio',
+      'Oklahoma', 'Ontario', 'Oregon', 'Palau', 'Pennsylvania', 'Prince Edward Island', 'Puerto Rico',
+      'Rhode Island', 'Saskatchewan', 'South Carolina', 'South Dakota', 'Tennessee',
       'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia',
-      'Washington', 'West Virginia', 'Wisconsin', 'Wyoming',
+      'Washington', 'West Virginia', 'Wisconsin', 'Wyoming', 'Yukon'
     ],
   }),
 
@@ -780,7 +793,8 @@ export default {
         suit: this.suits[this.suitCombo.suit],
         shirt: this.shirts[this.suitCombo.shirt],
         tie: this.ties.types[this.suitCombo.tie],
-        color: this.ties.colors[this.suitCombo.color]
+        color: this.ties.colors[this.suitCombo.color],
+        pattern: this.ties.patterns[this.suitCombo.pattern]
       }
     }
   },

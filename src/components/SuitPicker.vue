@@ -13,7 +13,17 @@
           <SuitPart :data="shirts" title="Select Shirt color" :active="suitCombo.shirt" :nothumbnail="true" @updateInfo="updateShirt($event)" />
         </v-col>
         <v-col cols="12" sm="12" md="4" offset-md="4">
-          <SuitTie :data="ties" :selectedcolor="suitCombo.color" :selectedtie="suitCombo.tie" @updateColor="setColor($event)" @tieUpdate="updateTie($event)" />
+          <SuitTie
+            :data="ties"
+            :selectedcolor="suitCombo.color"
+            :selectedtie="suitCombo.tie"
+            :selectedpattern="suitCombo.pattern"
+            :patterntoggle="suitCombo.pattern_toggle"
+            @updateToggle="updateToggle($event)"
+            @patternUpdate="updatePattern($event)"
+            @updateColor="setColor($event)"
+            @tieUpdate="updateTie($event)"
+          />
         </v-col>
         <v-col cols="12" sm="12" md="12">
           <v-btn depressed x-large @click="step = 2" class="groom-btn">
@@ -27,7 +37,7 @@
     <v-container class="mb-6 pa-10 text-center" v-if="step == 2">
       <v-row align="start" no-gutters>
         <v-col cols="12" sm="12" md="4" offset-md="4">
-          <CompleteSuit :suit="fullSuit" :suitID="suitCombo" @goto=" step = $event "/>
+          <CompleteSuit :suit="fullSuit" :suitID="suitCombo" @goto="step = $event" />
         </v-col>
         <v-col cols="12" sm="12" md="12">
           <v-btn depressed x-large @click="step = 3" class="groom-btn dark">
@@ -75,7 +85,7 @@
                   v-model="select"
                   :items="states"
                   :rules="[v => !!v || 'Item is required']"
-                  label="State"
+                  label="State/Province"
                   color=" #22394d"
                   required
                 ></v-select>
@@ -146,6 +156,8 @@ export default {
       shirt:0,
       tie:0,
       color: 0,
+      pattern_toggle: false,
+      pattern: 0
     },
     valid: false,
     name: '',
@@ -187,6 +199,13 @@ export default {
     updateTie(index){
       this.suitCombo.tie = index;
     },
+    updatePattern(index){
+      this.suitCombo.pattern = index;
+    },
+    updateToggle(index){
+      this.suitCombo.pattern_toggle = index;
+    },
+    
     sendMail() {
       
       this.validate(); 
@@ -194,7 +213,7 @@ export default {
       if(this.valid) {
         const token = process.env.VUE_APP_SMTP_TOKEN;
 
-        const html = `<h2>Quote request</h2><div><h3>Clients data:</h3><p><b>Name: </b> ${this.name} <br> <b>Email: </b> ${this.email} <br> <b>State: </b> ${this.select} <br> <b>Phone: </b> ${this.phone} <br> <b>Phone: </b> ${this.date} </p> <h3>Suit data:</h3><p> Suit: </b> ${this.fullSuit.suit.name} <br> Shirt: </b> ${this.fullSuit.shirt.name} <br> Tie type: </b> ${this.fullSuit.tie.name} <br> Tie color: </b> ${this.fullSuit.color.name} <br> Suit build: </b> ${this.shareUrl} </p></div>`;
+        const html = `<h2>Quote request</h2><div><h3>Clients data:</h3><p><b>Name: </b> ${this.name} <br> <b>Email: </b> ${this.email} <br> <b>State: </b> ${this.select} <br> <b>Phone: </b> ${this.phone} <br> <b>Phone: </b> ${this.date} </p> <h3>Suit data:</h3><b> Suit: </b> ${this.fullSuit.suit.name} <br><b> Shirt: </b> ${this.fullSuit.shirt.name} <br><b> Tie type: </b> ${this.fullSuit.tie.name} <br><b> Tie color: </b> ${this.fullSuit.color.name} <br> <b> Tie color: </b> ${this.fullSuit.color.name} <br><b> Suit build: </b> ${this.shareUrl} </p></div>`;
 
         Email.send({
           SecureToken : token,

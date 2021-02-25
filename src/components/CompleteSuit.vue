@@ -3,12 +3,11 @@
     <h2>View my suit</h2>
     <div class="full-suit-comp">
       <img class="full-suit-comp__base-image" :src="suit.shirt.part" alt="shirt">
-      <div class="tie-component" :style="`background-image: url(${suit.tie.part})`">
+      <div class="tie-component" :style="`background-image: url(${suit.pattern.part})`">
         <svg id='pattern' xmlns="http://www.w3.org/2000/svg" version="1.1">
           <defs>
             <pattern id='image' width="50" height="50" patternUnits="userSpaceOnUse">
               <rect height="200" width="200"/>
-              <image xlink:href="../assets/img/patterns/fine-lines.png" width="200" height="200" preserveAspectRatio="none"></image>
             </pattern>
           </defs>
         </svg>
@@ -26,6 +25,7 @@
           {{ suit.shirt.name }} Shirt<br>
           {{ suit.tie.name }}<br>
           {{ suit.color.name }} Tie<br>
+          {{ suit.pattern.name }}
         </p>
       </div>
       <hr>

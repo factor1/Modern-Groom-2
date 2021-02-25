@@ -11,26 +11,49 @@
             class="px-0"
             fluid
           >
-
           <div class="check-container">
-            <div :class="{'custom-check':true, 'active': selectedtie == index}" v-for="(type, index) in data.types" @click="updateTie(index)" :key="type.name" >
+            <div :class="{'custom-check':true, 'active': selectedtie == index}" v-for="(type, index) in data.types" @click="updateTie(index); updateSelected(index)" :key="type.name" >
               <div class="icon-container">
                 <v-icon mdi-check x-large v-show="selectedtie == index">mdi-check</v-icon>  
               </div>
               {{ type.name }}
             </div>
           </div>
-
           </v-container>
         </template>
       </div>
     </div>
+
+    <div class="tie-pattern">
+      <h2>Tie Patterns</h2>
+      <div class="suit-frame">
+        <img class="suit-frame__image" :src="data.patterns[selectedpattern].file" alt="suit">
+      </div>
+      <div class="suit-options">
+        <template>
+          <v-container
+            class="px-0"
+            fluid
+          >
+            <div class="check-container">
+              <div :class="{'custom-check':true, 'active': selectedpattern == index}" v-for="(pattern, index) in data.patterns" @click="updatePattern(index)" :key="pattern.name+index" v-show="pattern.type == data.types[selectedtie].name" >
+                <div class="icon-container">
+                  <v-icon mdi-check x-large v-show="selectedpattern == index">mdi-check</v-icon>  
+                </div>
+                {{ pattern.name }}
+              </div>
+            </div>
+          </v-container>
+        </template>
+      </div>
+    </div>
+
     <div class="tie-container">
       <h2>Tie Colors</h2>
       <div class="tie-colors">
         <div :class="{'tie-colors__single-colors':true, 'active': selectedcolor == index } " v-for="(color, index) in data.colors" :key="color.name" :style="`background-color: ${color.hex}; border-color: ${color.hex};`" @click="updateColor(index)">
           <div :class="{'is-dark': isDark(color.rgb)}">
-            {{ color.name }} 
+            {{ color.name }}
           </div>
         </div>
       </div>
@@ -41,7 +64,7 @@
 
 <script>
 export default {
-  props:['data', 'selectedcolor', 'selectedtie'],
+  props:['data', 'selectedcolor', 'selectedtie', 'selectedpattern', 'patterntoggle'],
 
   methods: {
     updateColor(index) {
@@ -50,6 +73,15 @@ export default {
     updateTie(index) {
       this.$emit('tieUpdate', index);
     },
+    updatePattern(index) {
+      this.$emit('patternUpdate', index);
+    },
+
+    updateSelected(index) {
+      const patternIndex = this.data.patterns.findIndex(pattern => pattern.type == this.data.types[index].name);
+      this.updatePattern(patternIndex);
+    },
+
     isDark: rgb => (
       Math.round(
         ((
@@ -97,11 +129,14 @@ $blue: #22394d;
   .check-container {
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: wrap;
 
     .custom-check {
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-basis: 50%;
+      margin-bottom: 20px;
 
       .icon-container {
         font-size: 40px;
