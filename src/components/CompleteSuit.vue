@@ -4,15 +4,8 @@
     <div class="full-suit-comp">
       <img class="full-suit-comp__base-image" :src="suit.shirt.part" alt="shirt">
       <div class="tie-component" :style="`background-image: url(${suit.pattern.part})`">
-        <svg id='pattern' xmlns="http://www.w3.org/2000/svg" version="1.1">
-          <defs>
-            <pattern id='image' width="50" height="50" patternUnits="userSpaceOnUse">
-              <rect height="200" width="200"/>
-            </pattern>
-          </defs>
-        </svg>
-        <BowTieComp class="tie-fill" v-if="suit.tie.name === 'Bow tie'"/>
-        <NeckTieComp class="tie-fill" v-else/>
+        <BowTieComp v-if="suit.tie.name === 'Bow tie'"/>
+        <NeckTieComp v-else/>
       </div>
       <img :src="suit.suit.part" alt="suit">
       <img src="../assets/img/suits/head.png" alt="head">
@@ -25,7 +18,7 @@
           {{ suit.shirt.name }} Shirt<br>
           {{ suit.tie.name }}<br>
           {{ suit.color.name }} Tie<br>
-          {{ suit.pattern.name }}
+          {{ suit.pattern.name }}<br>
         </p>
       </div>
       <hr>
@@ -62,10 +55,8 @@ export default {
 
     updatetieColor() {
       const paths = document.getElementsByTagName("path");
-      const paths2 = document.querySelector('#pattern rect');
       if( this.suit.color ) {
         paths[0].style.fill = this.suit.color.hex;
-        paths2.style.fill = this.suit.color.hex;
       }
     },
 
@@ -110,12 +101,6 @@ export default {
 
 <style lang="scss" scoped>
   $blue: #22394d;
-
-  .tie-fill {
-    path {
-      fill: url(#image) !important;
-    }
-  }
 
   hr {
     margin: 30px 0;
