@@ -213,7 +213,7 @@ export default {
       if(this.valid) {
         const token = process.env.VUE_APP_SMTP_TOKEN;
 
-        const html = `<h2>Quote request</h2><div><h3>Clients data:</h3><p><b>Name: </b> ${this.name} <br> <b>Email: </b> ${this.email} <br> <b>State: </b> ${this.select} <br> <b>Phone: </b> ${this.phone} <br> <b>Phone: </b> ${this.date} </p> <h3>Suit data:</h3><b> Suit: </b> ${this.fullSuit.suit.name} <br><b> Shirt: </b> ${this.fullSuit.shirt.name} <br><b> Tie type: </b> ${this.fullSuit.tie.name} <br><b> Tie color: </b> ${this.fullSuit.color.name} <br> <b> Tie color: </b> ${this.fullSuit.color.name} <br> <b> Tie pattern: </b> ${this.fullSuit.pattern.name} <br>fullSuit.pattern.name <b> Suit build: </b> ${this.shareUrl} </p></div>`;
+        const html = `<h2>Quote request</h2><div><h3>Clients data:</h3><p><b>Name: </b> ${this.name} <br> <b>Email: </b> ${this.email} <br> <b>State: </b> ${this.select} <br> <b>Phone: </b> ${this.phone} <br> <b>Phone: </b> ${this.date} </p> <h3>Suit data:</h3><b> Suit: </b> ${this.fullSuit.suit.name} <br><b> Shirt: </b> ${this.fullSuit.shirt.name} <br><b> Tie type: </b> ${this.fullSuit.tie.name} <br><b> Tie color: </b> ${this.fullSuit.color.name} <br> <b> Tie color: </b> ${this.fullSuit.color.name} <br> <b> Tie pattern: </b> ${this.fullSuit.pattern.name} <br><b> Suit build: </b> ${this.shareUrl} </p></div>`;
 
         Email.send({
           SecureToken : token,
@@ -252,7 +252,7 @@ export default {
     shareUrl(){
       let currentUrl = window.location.href;
       currentUrl = currentUrl.indexOf('?') < 0 ? currentUrl : currentUrl.substring(0, currentUrl.indexOf('?'));
-      currentUrl = currentUrl +`?suit=${this.suitCombo.suit}&shirt=${this.suitCombo.shirt}&tie=${this.suitCombo.tie}&color=${this.suitCombo.color}&pattern=${this.fullSuit.pattern.name}`;
+      currentUrl = currentUrl +`?suit=${this.suitCombo.suit}&shirt=${this.suitCombo.shirt}&tie=${this.suitCombo.tie}&color=${this.suitCombo.color}&pattern=${this.suitCombo.pattern}`;
       return currentUrl;
     }
   },
@@ -269,7 +269,7 @@ export default {
       this.suitCombo.shirt = this.shirts[shirt] ? shirt : 0;
       this.suitCombo.tie = this.ties.types[tie] ? tie : 0;
       this.suitCombo.color = this.ties.colors[color] ? color : 0;
-      this.suitCombo.pattern = this.ties.patterns[pattern] ? color : 0;
+      this.suitCombo.pattern = this.ties.patterns[pattern] ? pattern : 0;
       this.step = 2;
     }
 

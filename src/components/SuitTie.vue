@@ -128,13 +128,13 @@ $blue: #22394d;
 
   .check-container {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     flex-wrap: wrap;
 
     .custom-check {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       flex-basis: 50%;
       margin-bottom: 20px;
 

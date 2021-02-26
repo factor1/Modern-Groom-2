@@ -70,7 +70,7 @@ export default {
       let currentUrl = window.location.href;
       currentUrl = currentUrl.indexOf('?') < 0 ? currentUrl : currentUrl.substring(0, currentUrl.indexOf('?'));
       console.log(this.suit);
-      codeToCopy.value = currentUrl +`?suit=${this.suitID.suit}&shirt=${this.suitID.shirt}&tie=${this.suitID.tie}&color=${this.suitID.color}`;
+      codeToCopy.value = currentUrl +`?suit=${this.suitID.suit}&shirt=${this.suitID.shirt}&tie=${this.suitID.tie}&color=${this.suitID.color}&pattern=${this.suitID.pattern}`;
       codeToCopy.setAttribute('type', 'text');
       codeToCopy.select();
       try {
