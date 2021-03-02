@@ -30,11 +30,19 @@ import neckTie from '../assets/img/preview/necktie.jpg';
 import bowTiePart from '../assets/img/shirts_and_ties/Bowtie.png';
 import neckTiePart from '../assets/img/shirts_and_ties/Necktie.png';
 
-// Ties patterns
+// Patterns
+import bow_p1 from '../assets/img/preview/p1.jpg';
+import bow_p2 from '../assets/img/preview/p2.jpg';
+import neck_p1 from '../assets/img/preview/p3.jpg';
+import neck_p2 from '../assets/img/preview/p4.jpg';
+
+
+// Patterns parts
 import bowTiePattern1 from '../assets/img/patterns/Bowtie-pattern-1.png';
 import bowTiePattern2 from '../assets/img/patterns/Bowtie-pattern-2.png';
 import neckTiePattern1 from '../assets/img/patterns/Necktie-pattern-1.png';
 import neckTiePattern2 from '../assets/img/patterns/Necktie-pattern-2.png';
+
 
 export default {
 
@@ -762,11 +770,11 @@ export default {
       ],
       patterns: [
         { name: 'Solid color', type: 'Bow tie', file: bowTie, part: bowTiePart },
-        { name: 'pattern 1', type: 'Bow tie' , file: bowTiePattern1, part: bowTiePattern1 },
-        { name: 'pattern 2', type: 'Bow tie' , file: bowTiePattern2, part: bowTiePattern2 },
+        { name: 'pattern 1', type: 'Bow tie', file: bow_p1, part: bowTiePattern1 },
+        { name: 'pattern 2', type: 'Bow tie', file: bow_p2, part: bowTiePattern2 },
         { name: 'Solid color', type: 'Neck tie', file: neckTie, part: neckTiePart },
-        { name: 'pattern 3', type: 'Neck tie', file: neckTiePattern1, part: neckTiePattern1 },
-        { name: 'pattern 4', type: 'Neck tie', file: neckTiePattern2, part: neckTiePattern2 },
+        { name: 'pattern 3', type: 'Neck tie', file: neck_p1, part: neckTiePattern1 },
+        { name: 'pattern 4', type: 'Neck tie', file: neck_p2, part: neckTiePattern2 },
       ]
     },
     states: [

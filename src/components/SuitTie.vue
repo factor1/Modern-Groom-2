@@ -26,27 +26,13 @@
 
     <div class="tie-pattern">
       <h2>Tie Patterns</h2>
-      <div class="suit-frame">
-        <img class="suit-frame__image" :src="data.patterns[selectedpattern].file" alt="suit">
-      </div>
-      <div class="suit-options">
-        <template>
-          <v-container
-            class="px-0"
-            fluid
-          >
-            <div class="check-container">
-              <div :class="{'custom-check':true, 'active': selectedpattern == index}" v-for="(pattern, index) in data.patterns" @click="updatePattern(index)" :key="pattern.name+index" v-show="pattern.type == data.types[selectedtie].name" >
-                <div class="icon-container">
-                  <v-icon mdi-check x-large v-show="selectedpattern == index">mdi-check</v-icon>  
-                </div>
-                {{ pattern.name }}
-              </div>
-            </div>
-          </v-container>
-        </template>
+      <div class="pattern-container">
+        <div :class="{'single-pattern':true, 'active': selectedpattern == index}" v-for="(pattern, index) in data.patterns" @click="updatePattern(index)" :key="pattern.name+index" v-show="pattern.type == data.types[selectedtie].name" :style="`background: url(${data.patterns[index].file}) center/cover;`">
+          <div class="selection-border"></div>
+        </div>
       </div>
     </div>
+    <p class="quote"><i>Swipe for pattern options</i></p>
 
     <div class="tie-container">
       <h2>Tie Colors</h2>
@@ -162,12 +148,13 @@ $blue: #22394d;
   }
 }
 
-.tie-container {
+.tie-container, .tie-pattern {
   overflow-x: scroll;
+  max-width: 100%;
 }
 
 .quote {
-  margin: 10px 0;
+  margin: 10px 10px 50px;
   color: #ccc;
   font-weight: 300;
 }
@@ -199,5 +186,34 @@ $blue: #22394d;
   }
 
 }
+
+.pattern-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 700px;
+
+  .single-pattern {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 137px;
+    min-height: 50px;
+    margin: 7px;
+    font-size: 11px;
+    cursor: pointer;
+
+    &.active .selection-border{
+      border-color: #3a678d !important;
+    }
+
+    .selection-border {
+      height: 100%;
+      width: 100%;
+      border: solid 8px transparent;
+    }
+  }
+}
+
 </style>
   
