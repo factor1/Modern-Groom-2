@@ -24,31 +24,42 @@
       </div>
     </div>
 
-    <div class="tie-pattern">
-      <h2>Tie Patterns</h2>
-      <div class="pattern-container">
-        <div :class="{'single-pattern':true, 'active': selectedpattern == index}" v-for="(pattern, index) in data.patterns" @click="updatePattern(index)" :key="pattern.name+index" v-show="pattern.type == data.types[selectedtie].name" :style="`background: url(${data.patterns[index].file}) center/cover;`">
-          <div class="selection-border"></div>
-        </div>
-      </div>
-    </div>
-    <p class="quote"><i>Swipe for pattern options</i></p>
+    <vue-tabs
+      active-tab-color="#22394d" 
+      active-text-color="white"
+      @tab-change="solidToggle">
 
-    <div class="tie-container">
-      <h2>Tie Colors</h2>
-      <div class="tie-colors">
-        <div :class="{'tie-colors__single-colors':true, 'active': selectedcolor == index } " v-for="(color, index) in data.colors" :key="color.name" :style="`background-color: ${color.hex}; border-color: ${color.hex};`" @click="updateColor(index)">
-          <div :class="{'is-dark': isDark(color.rgb)}">
-            {{ color.name }}
+      <v-tab title="Tie Colors">
+        <div class="tie-container">
+          <div class="tie-colors">
+            <div :class="{'tie-colors__single-colors':true, 'active': selectedcolor == index } " v-for="(color, index) in data.colors" :key="color.name" :style="`background-color: ${color.hex}; border-color: ${color.hex};`" @click="updateColor(index)">
+              <div :class="{'is-dark': isDark(color.rgb)}">
+                {{ color.name }}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-    <p class="quote"><i>Swipe for color options</i></p>
+        <p class="quote"><i>Swipe for color options</i></p>
+      </v-tab>
+
+      <v-tab title="Tie Patterns">
+        <div class="tie-pattern">
+          <div class="pattern-container">
+            <div :class="{'single-pattern':true, 'active': selectedpattern == index}" v-for="(pattern, index) in data.patterns" @click="updatePattern(index)" :key="pattern.name+index" v-show="pattern.type == data.types[selectedtie].name" :style="`background: url(${data.patterns[index].file}) center/cover;`">
+              <div class="selection-border"></div>
+            </div>
+          </div>
+        </div>
+        <p class="quote"><i>Swipe for pattern options</i></p>
+      </v-tab>
+
+    </vue-tabs>
+
   </div>
 </template>
 
 <script>
+import {VueTabs, VTab} from 'vue-nav-tabs';
 export default {
   props:['data', 'selectedcolor', 'selectedtie', 'selectedpattern', 'patterntoggle'],
 
@@ -68,6 +79,11 @@ export default {
       this.updatePattern(patternIndex);
     },
 
+    solidToggle(event) {
+      const toggleState = event ? false : true;
+      this.$emit('toggleUpdate', toggleState);
+    },
+
     isDark: rgb => (
       Math.round(
         ((
@@ -78,12 +94,22 @@ export default {
     ),
   },
 
+  components: {
+    VueTabs,
+    VTab
+  }
+
 }
 </script>
 
 <style lang="scss" scoped>
 
 $blue: #22394d;
+
+.tab-content section{
+  border: solid 1px #dddddd !important;
+  border-top: none !important;
+}
 
 .suit-container {
   margin: 0 0;
@@ -154,7 +180,7 @@ $blue: #22394d;
 }
 
 .quote {
-  margin: 10px 10px 50px;
+  margin: 10px;
   color: #ccc;
   font-weight: 300;
 }

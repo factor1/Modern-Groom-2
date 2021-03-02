@@ -19,6 +19,7 @@
           {{ suit.tie.name }}<br>
           {{ suit.color.name }} Tie<br>
           {{ suit.pattern.name }}<br>
+          {{ suit.solid_toggle }}<br>
         </p>
       </div>
       <hr>
@@ -62,6 +63,7 @@ export default {
 
     returnEdit(step) {
       this.$emit('goto', step);
+      this.$emit('toggleUpdate', true);
     },
 
     shareURL() {

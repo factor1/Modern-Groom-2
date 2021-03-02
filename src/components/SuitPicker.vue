@@ -23,6 +23,7 @@
             @patternUpdate="updatePattern($event)"
             @updateColor="setColor($event)"
             @tieUpdate="updateTie($event)"
+            @toggleUpdate="suitCombo.solid_toggle = $event"
           />
         </v-col>
         <v-col cols="12" sm="12" md="12">
@@ -37,7 +38,11 @@
     <v-container class="mb-6 pa-10 text-center" v-if="step == 2">
       <v-row align="start" no-gutters>
         <v-col cols="12" sm="12" md="4" offset-md="4">
-          <CompleteSuit :suit="fullSuit" :suitID="suitCombo" @goto="step = $event" />
+          <CompleteSuit
+            :suit="fullSuit"
+            :suitID="suitCombo"
+            @goto="step=$event"
+            @toggleUpdate="suitCombo.solid_toggle = $event" />
         </v-col>
         <v-col cols="12" sm="12" md="12">
           <v-btn depressed x-large @click="step = 3" class="groom-btn dark">
@@ -156,7 +161,7 @@ export default {
       shirt:0,
       tie:0,
       color: 0,
-      pattern_toggle: false,
+      solid_toggle: true,
       pattern: 0
     },
     valid: false,

@@ -769,10 +769,8 @@ export default {
         },
       ],
       patterns: [
-        { name: 'Solid color', type: 'Bow tie', file: bowTie, part: bowTiePart },
         { name: 'pattern 1', type: 'Bow tie', file: bow_p1, part: bowTiePattern1 },
         { name: 'pattern 2', type: 'Bow tie', file: bow_p2, part: bowTiePattern2 },
-        { name: 'Solid color', type: 'Neck tie', file: neckTie, part: neckTiePart },
         { name: 'pattern 3', type: 'Neck tie', file: neck_p1, part: neckTiePattern1 },
         { name: 'pattern 4', type: 'Neck tie', file: neck_p2, part: neckTiePattern2 },
       ]
@@ -802,7 +800,8 @@ export default {
         shirt: this.shirts[this.suitCombo.shirt],
         tie: this.ties.types[this.suitCombo.tie],
         color: this.ties.colors[this.suitCombo.color],
-        pattern: this.ties.patterns[this.suitCombo.pattern]
+        pattern: this.ties.patterns[this.suitCombo.pattern],
+        solid_toggle: this.suitCombo.solid_toggle
       }
     }
   },
