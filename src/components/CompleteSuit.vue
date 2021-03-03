@@ -3,10 +3,11 @@
     <h2>View my suit</h2>
     <div class="full-suit-comp">
       <img class="full-suit-comp__base-image" :src="suit.shirt.part" alt="shirt">
-      <div class="tie-component" :style="`background-image: url(${suit.pattern.part})`">
+      <div class="tie-component" :style="`background-image: url(${ suit.solid_toggle ? suit.tie.part : suit.pattern.part})`">
         <BowTieComp v-if="suit.tie.name === 'Bow tie'"/>
         <NeckTieComp v-else/>
       </div>
+      <img :src="suit.tie.part" alt="tie shadow" class="tie-shadow">
       <img :src="suit.suit.part" alt="suit">
       <img src="../assets/img/suits/head.png" alt="head">
     </div>
@@ -17,9 +18,7 @@
           {{ suit.suit.name }} Suit<br>
           {{ suit.shirt.name }} Shirt<br>
           {{ suit.tie.name }}<br>
-          {{ suit.color.name }} Tie<br>
-          {{ suit.pattern.name }}<br>
-          {{ suit.solid_toggle }}<br>
+          {{ suit.solid_toggle ? suit.color.name : suit.pattern.name }} Tie<br>
         </p>
       </div>
       <hr>
@@ -56,7 +55,7 @@ export default {
 
     updatetieColor() {
       const paths = document.getElementsByTagName("path");
-      if( this.suit.color ) {
+      if( this.suit.color && this.suit.solid_toggle ) {
         paths[0].style.fill = this.suit.color.hex;
       }
     },
@@ -71,8 +70,7 @@ export default {
       let codeToCopy = document.querySelector('#testing-code');
       let currentUrl = window.location.href;
       currentUrl = currentUrl.indexOf('?') < 0 ? currentUrl : currentUrl.substring(0, currentUrl.indexOf('?'));
-      console.log(this.suit);
-      codeToCopy.value = currentUrl +`?suit=${this.suitID.suit}&shirt=${this.suitID.shirt}&tie=${this.suitID.tie}&color=${this.suitID.color}&pattern=${this.suitID.pattern}`;
+      codeToCopy.value = currentUrl +`?suit=${this.suitID.suit}&shirt=${this.suitID.shirt}&tie=${this.suitID.tie}&color=${this.suitID.color}&pattern=${this.suitID.pattern}&toggle=${ this.suitID.solid_toggle }`;
       codeToCopy.setAttribute('type', 'text');
       codeToCopy.select();
       try {
@@ -130,6 +128,11 @@ export default {
       left: 0;
       mix-blend-mode: multiply;
     }
+
+    .tie-shadow {
+      mix-blend-mode: color-burn;
+    }
+
   }
 
   .tie-component {
