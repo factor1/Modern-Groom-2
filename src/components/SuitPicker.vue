@@ -1,18 +1,18 @@
 <template>
   <div>
 
-    <v-container class="mb-6 pa-10 text-center" v-if="step == 1">
+    <v-container class="mb-12 pa-12 text-center">
       <v-row align="start" no-gutters>
-        <v-col cols="12" sm="12" md="12">
+        <v-col cols="6" sm="6" md="6">
           <h2>Build My Suit</h2>
         </v-col>
-        <v-col cols="12" sm="12" md="4" offset-md="4">
+        <v-col cols="6" sm="6" md="6">
           <SuitPart :data="suits" title="Select Suit Color" :active="suitCombo.suit" @updateInfo="updateSuit($event)" />
         </v-col>
-        <v-col cols="12" sm="12" md="4" offset-md="4">
+        <v-col cols="6" sm="6" md="6">
           <SuitPart :data="shirts" title="Select Shirt color" :active="suitCombo.shirt" :nothumbnail="true" @updateInfo="updateShirt($event)" />
         </v-col>
-        <v-col cols="12" sm="12" md="4" offset-md="4">
+        <v-col cols="6" sm="6" md="6">
           <SuitTie
             :data="ties"
             :selectedcolor="suitCombo.color"
@@ -26,35 +26,30 @@
             @toggleUpdate="suitCombo.solid_toggle = $event"
           />
         </v-col>
-        <v-col cols="12" sm="12" md="12">
+        <!-- <v-col cols="6" sm="6" md="6">
           <v-btn depressed x-large @click="step = 2" class="groom-btn">
             Build my suit
           </v-btn>
-        </v-col>
+        </v-col> -->
       </v-row>
 
-    </v-container>
-
-    <v-container class="mb-6 pa-10 text-center" v-if="step == 2">
       <v-row align="start" no-gutters>
-        <v-col cols="12" sm="12" md="4" offset-md="4">
+        <v-col cols="6" sm="6" md="6">
           <CompleteSuit
             :suit="fullSuit"
             :suitID="suitCombo"
             @goto="step=$event"
             @toggleUpdate="suitCombo.solid_toggle = $event" />
         </v-col>
-        <v-col cols="12" sm="12" md="12">
+        <v-col cols="6" sm="6" md="6">
           <v-btn depressed x-large @click="step = 3" class="groom-btn dark">
             Get Quote
           </v-btn>
         </v-col>
       </v-row>
-    </v-container>
 
-    <v-container class="mb-6 pa-10 text-center" v-if="step == 3">
       <v-row align="start" no-gutters>
-        <v-col cols="12" sm="12" md="4" offset-md="4">
+        <v-col cols="6" sm="6" md="6">
           <h2>Send Us Your Info</h2>
 
             <v-form
@@ -124,7 +119,7 @@
               </v-form>
 
         </v-col>
-        <v-col cols="12" sm="12" md="12">
+        <v-col cols="6" sm="6" md="6">
           <v-btn depressed x-large @click="sendMail" class="groom-btn dark">
             send
           </v-btn>

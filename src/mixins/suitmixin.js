@@ -121,11 +121,11 @@ export default {
         },
         {
           "name": "BB-SAPPHIRE",
-          "hex": "#30a1b5",
+          "hex": "#1C828A",
           "rgb": {
-            "r": 48,
-            "g": 161,
-            "b": 181
+            "r": 28,
+            "g": 130,
+            "b": 138
           }
         },
         {
@@ -174,12 +174,12 @@ export default {
           }
         },
         {
-          "name": "Deep Navy",
-          "hex": "#2f4a60",
+          "name": "ND- DUSTY BLUE",
+          "hex": "#6F98AB",
           "rgb": {
-            "r": 47,
-            "g": 74,
-            "b": 96
+            "r": 111,
+            "g": 152,
+            "b": 171
           }
         },
         {
@@ -247,11 +247,11 @@ export default {
         },
         {
           "name": "H-CHAMPAGNE",
-          "hex": "#d1c49f",
+          "hex": "#FAF0CD",
           "rgb": {
-            "r": 209,
-            "g": 196,
-            "b": 159
+            "r": 250,
+            "g": 240,
+            "b": 205
           }
         },
         {
@@ -642,12 +642,12 @@ export default {
           }
         },
         {
-          "name": "RR-ROSE",
-          "hex": "#d6949c",
+          "name": "RR- DUSTY ROSE",
+          "hex": "#E69A97",
           "rgb": {
-            "r": 214,
-            "g": 148,
-            "b": 156
+            "r": 230,
+            "g": 154,
+            "b": 151
           }
         },
         {
@@ -688,11 +688,11 @@ export default {
         },
         {
           "name": "V-MINT",
-          "hex": "#adc69f",
+          "hex": "#DDE6D5",
           "rgb": {
-            "r": 173,
-            "g": 198,
-            "b": 159
+            "r": 221,
+            "g": 230,
+            "b": 213
           }
         },
         {
@@ -750,12 +750,12 @@ export default {
           }
         },
         {
-          "name": "Z-EMERALD GREEN",
-          "hex": "#26592f",
+          "name": "Z- KELLY GREEN",
+          "hex": "#129A1E",
           "rgb": {
-            "r": 38,
-            "g": 89,
-            "b": 47
+            "r": 18,
+            "g": 154,
+            "b": 30
           }
         },
         {
