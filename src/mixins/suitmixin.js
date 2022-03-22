@@ -804,6 +804,5 @@ export default {
         solid_toggle: this.suitCombo.solid_toggle
       }
     }
-  },
-
+  }
 }

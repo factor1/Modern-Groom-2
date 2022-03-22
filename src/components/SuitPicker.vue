@@ -1,18 +1,11 @@
 <template>
   <div>
 
-    <v-container class="mb-12 pa-12 text-center">
-      <v-row align="start" no-gutters>
-        <v-col cols="6" sm="6" md="6">
-          <h2>Build My Suit</h2>
-        </v-col>
-        <v-col cols="6" sm="6" md="6">
+    <v-container class="text-center">
+      <v-row align="start">
+        <v-col cols="12" sm="12" md="5"  lg="4" offset-md="1" offset-lg="2" class="inner-scroll">
           <SuitPart :data="suits" title="Select Suit Color" :active="suitCombo.suit" @updateInfo="updateSuit($event)" />
-        </v-col>
-        <v-col cols="6" sm="6" md="6">
           <SuitPart :data="shirts" title="Select Shirt color" :active="suitCombo.shirt" :nothumbnail="true" @updateInfo="updateShirt($event)" />
-        </v-col>
-        <v-col cols="6" sm="6" md="6">
           <SuitTie
             :data="ties"
             :selectedcolor="suitCombo.color"
@@ -26,30 +19,29 @@
             @toggleUpdate="suitCombo.solid_toggle = $event"
           />
         </v-col>
-        <!-- <v-col cols="6" sm="6" md="6">
-          <v-btn depressed x-large @click="step = 2" class="groom-btn">
-            Build my suit
-          </v-btn>
-        </v-col> -->
-      </v-row>
-
-      <v-row align="start" no-gutters>
-        <v-col cols="6" sm="6" md="6">
+        <v-col cols="12" sm="12" md="5" lg="4" >
           <CompleteSuit
             :suit="fullSuit"
             :suitID="suitCombo"
             @goto="step=$event"
             @toggleUpdate="suitCombo.solid_toggle = $event" />
         </v-col>
-        <v-col cols="6" sm="6" md="6">
-          <v-btn depressed x-large @click="step = 3" class="groom-btn dark">
-            Get Quote
-          </v-btn>
+      </v-row>
+
+      <v-row align="start">
+        <v-col cols="12" sm="12" md="6" offset-md="3" class="share-block">
+          <input type="hidden" id="testing-code">
+          <div class="buttons-container">
+            <div class="button-box" @click="shareURL()">
+              <v-icon x-large>mdi-upload-outline</v-icon>
+              Share suit
+            </div>
+          </div>
         </v-col>
       </v-row>
 
-      <v-row align="start" no-gutters>
-        <v-col cols="6" sm="6" md="6">
+      <v-row align="start">
+        <v-col cols="12" sm="12" md="6" offset-md="3">
           <h2>Send Us Your Info</h2>
 
             <v-form
@@ -117,17 +109,13 @@
                 </v-menu>
 
               </v-form>
+              <v-btn depressed x-large @click="sendMail" class="groom-btn dark">
+                send
+              </v-btn>
 
         </v-col>
-        <v-col cols="6" sm="6" md="6">
-          <v-btn depressed x-large @click="sendMail" class="groom-btn dark">
-            send
-          </v-btn>
-        </v-col>
-
       </v-row>
     </v-container>
-
   </div>
 </template>
   
@@ -205,6 +193,25 @@ export default {
     updateToggle(index){
       this.suitCombo.pattern_toggle = index;
     },
+
+    shareURL() {
+      let codeToCopy = document.querySelector('#testing-code');
+      let currentUrl = window.location.href;
+      currentUrl = currentUrl.indexOf('?') < 0 ? currentUrl : currentUrl.substring(0, currentUrl.indexOf('?'));
+      codeToCopy.value = currentUrl + `?suit=${this.suitCombo.suit}&shirt=${this.suitCombo.shirt}&tie=${this.suitCombo.tie}&color=${this.suitCombo.color}&pattern=${this.suitCombo.pattern}&toggle=${this.suitCombo.solid_toggle}`;
+      codeToCopy.setAttribute('type', 'text');
+      codeToCopy.select();
+      try {
+        const successful = document.execCommand('copy');
+        const msg = successful ? 'successfully' : 'unsuccessfully';
+        alert('Shareable url was copied ' + msg);
+      } catch (err) {
+        alert('Oops, unable to copy');
+      }
+
+      codeToCopy.setAttribute('type', 'hidden');
+      window.getSelection().removeAllRanges();
+    },
     
     sendMail() {
       
@@ -248,15 +255,6 @@ export default {
 
   },
 
-  computed: {
-    shareUrl(){
-      let currentUrl = window.location.href;
-      currentUrl = currentUrl.indexOf('?') < 0 ? currentUrl : currentUrl.substring(0, currentUrl.indexOf('?'));
-      currentUrl = currentUrl +`?suit=${this.suitCombo.suit}&shirt=${this.suitCombo.shirt}&tie=${this.suitCombo.tie}&color=${this.suitCombo.color}&pattern=${this.suitCombo.pattern}&toggle=${this.suitCombo.solid_toggle}`;
-      return currentUrl;
-    }
-  },
-
   beforeMount() {
     const suit = this.$route.query.suit;
     const shirt = this.$route.query.shirt;
@@ -281,5 +279,51 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  $blue: #22394d;
 
+  .buttons-container {
+    display: flex;
+    justify-content: space-around;
+
+    .button-box {
+      display: flex;
+      flex-direction: column;
+      color: $blue;
+
+      i {
+        color: $blue;
+      }
+    }
+  }
+
+  .share-block {
+    padding: 50px 0;
+  }
+
+  .inner-scroll {
+    height: calc(100vh - 15px);
+    overflow-y: scroll;
+
+    /* width */
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 50px;
+    }
+    
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: #ccc; 
+      border-radius: 50px;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555; 
+    }
+  }
 </style>

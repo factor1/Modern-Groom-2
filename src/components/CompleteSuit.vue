@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2>View my suit</h2>
     <div class="full-suit-comp">
       <img class="full-suit-comp__base-image" :src="suit.shirt.part" alt="shirt">
       <div class="tie-component" :style="`background-image: url(${ suit.solid_toggle ? suit.tie.part : suit.pattern.part})`">
@@ -21,18 +20,6 @@
           {{ suit.solid_toggle ? suit.color.name : suit.pattern.name }} Tie<br>
         </p>
       </div>
-      <hr>
-      <input type="hidden" id="testing-code">
-      <div class="buttons-container">
-        <div class="button-box" @click="returnEdit(1)">
-          <v-icon x-large>mdi-pencil</v-icon>
-          Edit suit
-        </div>
-        <div class="button-box" @click="shareURL()">
-          <v-icon x-large>mdi-upload-outline</v-icon>
-          Share suit
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -52,7 +39,6 @@ export default {
   },
 
   methods: {
-
     updatetieColor() {
       const paths = document.getElementsByTagName("path");
       if( this.suit.color && this.suit.solid_toggle ) {
@@ -65,25 +51,6 @@ export default {
       this.$emit('toggleUpdate', true);
     },
 
-    shareURL() {
-
-      let codeToCopy = document.querySelector('#testing-code');
-      let currentUrl = window.location.href;
-      currentUrl = currentUrl.indexOf('?') < 0 ? currentUrl : currentUrl.substring(0, currentUrl.indexOf('?'));
-      codeToCopy.value = currentUrl +`?suit=${this.suitID.suit}&shirt=${this.suitID.shirt}&tie=${this.suitID.tie}&color=${this.suitID.color}&pattern=${this.suitID.pattern}&toggle=${ this.suitID.solid_toggle }`;
-      codeToCopy.setAttribute('type', 'text');
-      codeToCopy.select();
-      try {
-        const successful = document.execCommand('copy');
-        const msg = successful ? 'successfully' : 'unsuccessfully';
-        alert('Shareable url was copied ' + msg);
-      } catch (err) {
-        alert('Oops, unable to copy');
-      }
-
-      codeToCopy.setAttribute('type', 'hidden');
-      window.getSelection().removeAllRanges();
-    }
   },
 
   mounted() {
@@ -95,7 +62,6 @@ export default {
       this.updatetieColor();
     }
   }
-
 }
 </script>
 
@@ -151,18 +117,4 @@ export default {
     }
   }
 
-  .buttons-container {
-    display: flex;
-    justify-content: space-around;
-
-    .button-box {
-      display: flex;
-      flex-direction: column;
-      color: $blue;
-
-      i {
-        color: $blue;
-      }
-    }
-  }
 </style>
