@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="full-suit-comp">
+    <div class="full-suit-comp" @click="showFullscreen()">
       <img class="full-suit-comp__base-image" :src="suit.shirt.part" alt="shirt">
       <div class="tie-component" :style="`background-image: url(${ suit.solid_toggle ? suit.tie.part : suit.pattern.part})`">
         <BowTieComp v-if="suit.tie.name === 'Bow tie'"/>
@@ -10,6 +10,20 @@
       <img :src="suit.suit.part" alt="suit">
       <img src="../assets/img/suits/head.png" alt="head">
     </div>
+
+    <div class="full-screen-combo" ref="fullscreen" @click="hideFullscreen()">
+      <div class="full-suit-comp">
+        <img class="full-suit-comp__base-image" :src="suit.shirt.part" alt="shirt">
+        <div class="tie-component" :style="`background-image: url(${ suit.solid_toggle ? suit.tie.part : suit.pattern.part})`">
+          <BowTieComp v-if="suit.tie.name === 'Bow tie'"/>
+          <NeckTieComp v-else/>
+        </div>
+        <img :src="suit.tie.part" alt="tie shadow" class="tie-shadow">
+        <img :src="suit.suit.part" alt="suit">
+        <img src="../assets/img/suits/head.png" alt="head">
+      </div>
+    </div>
+
     <div class="suit-controls">
       <div>
         <p class="suit-controls__suit-data">
@@ -43,6 +57,7 @@ export default {
       const paths = document.getElementsByTagName("path");
       if( this.suit.color && this.suit.solid_toggle ) {
         paths[0].style.fill = this.suit.color.hex;
+        paths[1].style.fill = this.suit.color.hex;
       }
     },
 
@@ -50,6 +65,14 @@ export default {
       this.$emit('goto', step);
       this.$emit('toggleUpdate', true);
     },
+
+    showFullscreen() {
+      this.$refs.fullscreen.classList.add('active');
+    },
+
+    hideFullscreen() {
+      this.$refs.fullscreen.classList.remove('active');
+    }
 
   },
 
@@ -114,6 +137,27 @@ export default {
   .suit-controls {
     &__suit-data {
       text-align: center;
+    }
+  }
+
+  .full-screen-combo {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    overflow-y: scroll;
+    display: none;
+
+    &.active {
+      display: block;
+    }
+
+    .full-suit-comp {
+      margin: 20px auto;
+      max-width: 80vw;
     }
   }
 
