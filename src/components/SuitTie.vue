@@ -32,7 +32,7 @@
       <v-tab title="Tie Colors">
         <div class="tie-container">
           <div class="tie-colors">
-            <div :class="{'tie-colors__single-colors':true, 'active': selectedcolor == index } " v-for="(color, index) in data.colors" :key="color.name" :style="`background-color: ${color.hex}; border-color: ${color.hex};`" @click="updateColor(index)">
+            <div :class="{'tie-colors__single-colors':true, 'active': selectedcolor == index } " v-for="(color, index) in sortedColors" :key="color.name" :style="`background-color: ${color.hex}; border-color: ${color.hex};`" @click="updateColor(index)">
               <div :class="{'is-dark': isDark(color.rgb)}">
                 {{ color.name }}
               </div>
@@ -42,7 +42,7 @@
         <p class="quote"><i>Swipe for color options</i></p>
       </v-tab>
 
-      <v-tab title="Tie Patterns">
+      <v-tab title="Tie Patterns" v-if="data.types[selectedtie].name != 'Bow tie'">
         <div class="tie-pattern">
           <div class="pattern-container">
             <div :class="{'single-pattern':true, 'active': selectedpattern == index}" v-for="(pattern, index) in data.patterns" @click="updatePattern(index)" :key="pattern.name+index" v-show="pattern.type == data.types[selectedtie].name" :style="`background: url(${data.patterns[index].file}) center/cover;`">
@@ -60,8 +60,13 @@
 
 <script>
 import {VueTabs, VTab} from 'vue-nav-tabs';
+
+// mixin
+import suitMixin from '../mixins/suitmixin';
 export default {
   props:['data', 'selectedcolor', 'selectedtie', 'selectedpattern', 'patterntoggle'],
+
+  mixins:[suitMixin],
 
   methods: {
     updateColor(index) {
@@ -79,9 +84,10 @@ export default {
       this.updatePattern(patternIndex);
     },
 
-    solidToggle(event) {
-      const toggleState = event ? false : true;
+    solidToggle(tabIndex) {
+      const toggleState = tabIndex ? false : true;
       this.$emit('toggleUpdate', toggleState);
+      this.updateColor(0);
     },
 
     isDark: rgb => (
@@ -92,6 +98,14 @@ export default {
           (parseInt(rgb.b) * 114)) / 1000)
       ) < 125
     ),
+
+  },
+
+  computed: {
+    sortedColors() {
+      let allColors = this.data.colors;
+      return allColors.sort((a, b) => a.name.localeCompare(b.name));
+    }
   },
 
   components: {

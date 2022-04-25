@@ -45,7 +45,7 @@ import NeckTieComp from '../assets/img/shirts_and_ties/necktie.svg';
 
 export default {
 
-  props:['suit', 'suitID'],
+  props:['suit', 'suitID', 'updateTie'],
 
   components: {
     BowTieComp,
@@ -55,7 +55,7 @@ export default {
   methods: {
     updatetieColor() {
       const paths = document.getElementsByTagName("path");
-      if( this.suit.color && this.suit.solid_toggle ) {
+      if( this.suit.color ) {
         paths[0].style.fill = this.suit.color.hex;
         paths[1].style.fill = this.suit.color.hex;
       }
