@@ -1,15 +1,29 @@
 <template>
   <div>
-    <h2>View my suit</h2>
-    <div class="full-suit-comp">
+    <div class="full-suit-comp" @click="showFullscreen()">
       <img class="full-suit-comp__base-image" :src="suit.shirt.part" alt="shirt">
-      <div class="tie-component" :style="`background-image: url(${suit.tie.part})`">
+      <div class="tie-component" :style="`background-image: url(${ suit.solid_toggle ? suit.tie.part : suit.pattern.part})`">
         <BowTieComp v-if="suit.tie.name === 'Bow tie'"/>
         <NeckTieComp v-else/>
       </div>
+      <img :src="suit.tie.part" alt="tie shadow" class="tie-shadow">
       <img :src="suit.suit.part" alt="suit">
       <img src="../assets/img/suits/head.png" alt="head">
     </div>
+
+    <div class="full-screen-combo" ref="fullscreen" @click="hideFullscreen()">
+      <div class="full-suit-comp">
+        <img class="full-suit-comp__base-image" :src="suit.shirt.part" alt="shirt">
+        <div class="tie-component" :style="`background-image: url(${ suit.solid_toggle ? suit.tie.part : suit.pattern.part})`">
+          <BowTieComp v-if="suit.tie.name === 'Bow tie'"/>
+          <NeckTieComp v-else/>
+        </div>
+        <img :src="suit.tie.part" alt="tie shadow" class="tie-shadow">
+        <img :src="suit.suit.part" alt="suit">
+        <img src="../assets/img/suits/head.png" alt="head">
+      </div>
+    </div>
+
     <div class="suit-controls">
       <div>
         <p class="suit-controls__suit-data">
@@ -17,20 +31,8 @@
           {{ suit.suit.name }} Suit<br>
           {{ suit.shirt.name }} Shirt<br>
           {{ suit.tie.name }}<br>
-          {{ suit.color.name }} Tie<br>
+          {{ suit.solid_toggle ? suit.color.name : suit.pattern.name }} Tie<br>
         </p>
-      </div>
-      <hr>
-      <input type="hidden" id="testing-code">
-      <div class="buttons-container">
-        <div class="button-box" @click="returnEdit(1)">
-          <v-icon x-large>mdi-pencil</v-icon>
-          Edit suit
-        </div>
-        <div class="button-box" @click="shareURL()">
-          <v-icon x-large>mdi-upload-outline</v-icon>
-          Share suit
-        </div>
       </div>
     </div>
   </div>
@@ -51,38 +53,27 @@ export default {
   },
 
   methods: {
-
     updatetieColor() {
       const paths = document.getElementsByTagName("path");
-      if( this.suit.color ) {
+      if( this.suit.color && this.suit.solid_toggle ) {
         paths[0].style.fill = this.suit.color.hex;
+        paths[1].style.fill = this.suit.color.hex;
       }
     },
 
     returnEdit(step) {
       this.$emit('goto', step);
+      this.$emit('toggleUpdate', true);
     },
 
-    shareURL() {
+    showFullscreen() {
+      this.$refs.fullscreen.classList.add('active');
+    },
 
-      let codeToCopy = document.querySelector('#testing-code');
-      let currentUrl = window.location.href;
-      currentUrl = currentUrl.indexOf('?') < 0 ? currentUrl : currentUrl.substring(0, currentUrl.indexOf('?'));
-      console.log(this.suit);
-      codeToCopy.value = currentUrl +`?suit=${this.suitID.suit}&shirt=${this.suitID.shirt}&tie=${this.suitID.tie}&color=${this.suitID.color}`;
-      codeToCopy.setAttribute('type', 'text');
-      codeToCopy.select();
-      try {
-        const successful = document.execCommand('copy');
-        const msg = successful ? 'successfully' : 'unsuccessfully';
-        alert('Shareable url was copied ' + msg);
-      } catch (err) {
-        alert('Oops, unable to copy');
-      }
-
-      codeToCopy.setAttribute('type', 'hidden');
-      window.getSelection().removeAllRanges();
+    hideFullscreen() {
+      this.$refs.fullscreen.classList.remove('active');
     }
+
   },
 
   mounted() {
@@ -94,7 +85,6 @@ export default {
       this.updatetieColor();
     }
   }
-
 }
 </script>
 
@@ -127,6 +117,11 @@ export default {
       left: 0;
       mix-blend-mode: multiply;
     }
+
+    .tie-shadow {
+      mix-blend-mode: color-burn;
+    }
+
   }
 
   .tie-component {
@@ -145,18 +140,25 @@ export default {
     }
   }
 
-  .buttons-container {
-    display: flex;
-    justify-content: space-around;
+  .full-screen-combo {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    overflow-y: scroll;
+    display: none;
 
-    .button-box {
-      display: flex;
-      flex-direction: column;
-      color: $blue;
+    &.active {
+      display: block;
+    }
 
-      i {
-        color: $blue;
-      }
+    .full-suit-comp {
+      margin: 20px auto;
+      max-width: 80vw;
     }
   }
+
 </style>

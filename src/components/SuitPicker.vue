@@ -1,45 +1,47 @@
 <template>
   <div>
 
-    <v-container class="mb-6 pa-10 text-center" v-if="step == 1">
-      <v-row align="start" no-gutters>
-        <v-col cols="12" sm="12" md="12">
-          <h2>Build My Suit</h2>
-        </v-col>
-        <v-col cols="12" sm="12" md="4" offset-md="4">
+    <v-container class="text-center">
+      <v-row align="start">
+        <v-col cols="12" sm="12" md="5"  lg="4" offset-md="1" offset-lg="2" class="inner-scroll">
           <SuitPart :data="suits" title="Select Suit Color" :active="suitCombo.suit" @updateInfo="updateSuit($event)" />
-        </v-col>
-        <v-col cols="12" sm="12" md="4" offset-md="4">
           <SuitPart :data="shirts" title="Select Shirt color" :active="suitCombo.shirt" :nothumbnail="true" @updateInfo="updateShirt($event)" />
+          <SuitTie
+            :data="ties"
+            :selectedcolor="suitCombo.color"
+            :selectedtie="suitCombo.tie"
+            :selectedpattern="suitCombo.pattern"
+            :patterntoggle="suitCombo.pattern_toggle"
+            @updateToggle="updateToggle($event)"
+            @patternUpdate="updatePattern($event)"
+            @updateColor="setColor($event)"
+            @tieUpdate="updateTie($event)"
+            @toggleUpdate="suitCombo.solid_toggle = $event"
+          />
         </v-col>
-        <v-col cols="12" sm="12" md="4" offset-md="4">
-          <SuitTie :data="ties" :selectedcolor="suitCombo.color" :selectedtie="suitCombo.tie" @updateColor="setColor($event)" @tieUpdate="updateTie($event)" />
+        <v-col cols="12" sm="12" md="5" lg="4" >
+          <CompleteSuit
+            :suit="fullSuit"
+            :suitID="suitCombo"
+            @goto="step=$event"
+            @toggleUpdate="suitCombo.solid_toggle = $event" />
         </v-col>
-        <v-col cols="12" sm="12" md="12">
-          <v-btn depressed x-large @click="step = 2" class="groom-btn">
-            Build my suit
-          </v-btn>
+      </v-row>
+
+      <v-row align="start">
+        <v-col cols="12" sm="12" md="6" offset-md="3" class="share-block">
+          <input type="hidden" id="testing-code">
+          <div class="buttons-container">
+            <div class="button-box" @click="shareURL()">
+              <v-icon x-large>mdi-upload-outline</v-icon>
+              Share suit
+            </div>
+          </div>
         </v-col>
       </v-row>
 
-    </v-container>
-
-    <v-container class="mb-6 pa-10 text-center" v-if="step == 2">
-      <v-row align="start" no-gutters>
-        <v-col cols="12" sm="12" md="4" offset-md="4">
-          <CompleteSuit :suit="fullSuit" :suitID="suitCombo" @goto=" step = $event "/>
-        </v-col>
-        <v-col cols="12" sm="12" md="12">
-          <v-btn depressed x-large @click="step = 3" class="groom-btn dark">
-            Get Quote
-          </v-btn>
-        </v-col>
-      </v-row>
-    </v-container>
-
-    <v-container class="mb-6 pa-10 text-center" v-if="step == 3">
-      <v-row align="start" no-gutters>
-        <v-col cols="12" sm="12" md="4" offset-md="4">
+      <v-row align="start">
+        <v-col cols="12" sm="12" md="6" offset-md="3">
           <h2>Send Us Your Info</h2>
 
             <v-form
@@ -75,7 +77,7 @@
                   v-model="select"
                   :items="states"
                   :rules="[v => !!v || 'Item is required']"
-                  label="State"
+                  label="State/Province"
                   color=" #22394d"
                   required
                 ></v-select>
@@ -107,17 +109,13 @@
                 </v-menu>
 
               </v-form>
+              <v-btn depressed x-large @click="sendMail" class="groom-btn dark">
+                send
+              </v-btn>
 
         </v-col>
-        <v-col cols="12" sm="12" md="12">
-          <v-btn depressed x-large @click="sendMail" class="groom-btn dark">
-            send
-          </v-btn>
-        </v-col>
-
       </v-row>
     </v-container>
-
   </div>
 </template>
   
@@ -146,6 +144,8 @@ export default {
       shirt:0,
       tie:0,
       color: 0,
+      solid_toggle: true,
+      pattern: 0
     },
     valid: false,
     name: '',
@@ -187,6 +187,32 @@ export default {
     updateTie(index){
       this.suitCombo.tie = index;
     },
+    updatePattern(index){
+      this.suitCombo.pattern = index;
+    },
+    updateToggle(index){
+      this.suitCombo.pattern_toggle = index;
+    },
+
+    shareURL() {
+      let codeToCopy = document.querySelector('#testing-code');
+      let currentUrl = window.location.href;
+      currentUrl = currentUrl.indexOf('?') < 0 ? currentUrl : currentUrl.substring(0, currentUrl.indexOf('?'));
+      codeToCopy.value = currentUrl + `?suit=${this.suitCombo.suit}&shirt=${this.suitCombo.shirt}&tie=${this.suitCombo.tie}&color=${this.suitCombo.color}&pattern=${this.suitCombo.pattern}&toggle=${this.suitCombo.solid_toggle}`;
+      codeToCopy.setAttribute('type', 'text');
+      codeToCopy.select();
+      try {
+        const successful = document.execCommand('copy');
+        const msg = successful ? 'successfully' : 'unsuccessfully';
+        alert('Shareable url was copied ' + msg);
+      } catch (err) {
+        alert('Oops, unable to copy');
+      }
+
+      codeToCopy.setAttribute('type', 'hidden');
+      window.getSelection().removeAllRanges();
+    },
+    
     sendMail() {
       
       this.validate(); 
@@ -194,7 +220,7 @@ export default {
       if(this.valid) {
         const token = process.env.VUE_APP_SMTP_TOKEN;
 
-        const html = `<h2>Quote request</h2><div><h3>Clients data:</h3><p><b>Name: </b> ${this.name} <br> <b>Email: </b> ${this.email} <br> <b>State: </b> ${this.select} <br> <b>Phone: </b> ${this.phone} <br> <b>Phone: </b> ${this.date} </p> <h3>Suit data:</h3><p> Suit: </b> ${this.fullSuit.suit.name} <br> Shirt: </b> ${this.fullSuit.shirt.name} <br> Tie type: </b> ${this.fullSuit.tie.name} <br> Tie color: </b> ${this.fullSuit.color.name} <br> Suit build: </b> ${this.shareUrl} </p></div>`;
+        const html = `<h2>Quote request</h2><div><h3>Clients data:</h3><p><b>Name: </b> ${this.name} <br> <b>Email: </b> ${this.email} <br> <b>State: </b> ${this.select} <br> <b>Phone: </b> ${this.phone} <br> <b>Date: </b> ${this.date} </p> <h3>Suit data:</h3><b> Suit: </b> ${this.fullSuit.suit.name} <br><b> Shirt: </b> ${this.fullSuit.shirt.name} <br><b> Tie type: </b> ${this.fullSuit.tie.name} <br><b> Tie: </b> ${ this.fullSuit.solid_toggle ? this.fullSuit.color.name : this.fullSuit.pattern.name} <br><b> Suit build: </b> ${this.shareUrl} </p></div>`;
 
         Email.send({
           SecureToken : token,
@@ -229,26 +255,21 @@ export default {
 
   },
 
-  computed: {
-    shareUrl(){
-      let currentUrl = window.location.href;
-      currentUrl = currentUrl.indexOf('?') < 0 ? currentUrl : currentUrl.substring(0, currentUrl.indexOf('?'));
-      currentUrl = currentUrl +`?suit=${this.suitCombo.suit}&shirt=${this.suitCombo.shirt}&tie=${this.suitCombo.tie}&color=${this.suitCombo.color}`;
-      return currentUrl;
-    }
-  },
-
   beforeMount() {
     const suit = this.$route.query.suit;
     const shirt = this.$route.query.shirt;
     const tie = this.$route.query.tie;
     const color = this.$route.query.color;
+    const pattern = this.$route.query.pattern;
+    const toggle = this.$route.query.toggle;
 
-    if (suit,shirt,tie,color) {
+    if (suit && shirt && tie && color && pattern && toggle) {
       this.suitCombo.suit = this.suits[suit] ? suit : 0;
       this.suitCombo.shirt = this.shirts[shirt] ? shirt : 0;
       this.suitCombo.tie = this.ties.types[tie] ? tie : 0;
       this.suitCombo.color = this.ties.colors[color] ? color : 0;
+      this.suitCombo.pattern = this.ties.patterns[pattern] ? pattern : 0;
+      this.suitCombo.solid_toggle = toggle == 'true' ? true : false;
       this.step = 2;
     }
 
@@ -258,5 +279,51 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  $blue: #22394d;
 
+  .buttons-container {
+    display: flex;
+    justify-content: space-around;
+
+    .button-box {
+      display: flex;
+      flex-direction: column;
+      color: $blue;
+
+      i {
+        color: $blue;
+      }
+    }
+  }
+
+  .share-block {
+    padding: 50px 0;
+  }
+
+  .inner-scroll {
+    height: calc(100vh - 15px);
+    overflow-y: scroll;
+
+    /* width */
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 50px;
+    }
+    
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: #ccc; 
+      border-radius: 50px;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555; 
+    }
+  }
 </style>

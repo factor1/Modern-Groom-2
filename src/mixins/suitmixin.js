@@ -30,6 +30,19 @@ import neckTie from '../assets/img/preview/necktie.jpg';
 import bowTiePart from '../assets/img/shirts_and_ties/Bowtie.png';
 import neckTiePart from '../assets/img/shirts_and_ties/Necktie.png';
 
+// Patterns
+import bow_p1 from '../assets/img/preview/p1.jpg';
+import bow_p2 from '../assets/img/preview/p2.jpg';
+import neck_p1 from '../assets/img/preview/p3.jpg';
+import neck_p2 from '../assets/img/preview/p4.jpg';
+
+
+// Patterns parts
+import bowTiePattern1 from '../assets/img/patterns/Bowtie-pattern-1.png';
+import bowTiePattern2 from '../assets/img/patterns/Bowtie-pattern-2.png';
+import neckTiePattern1 from '../assets/img/patterns/Necktie-pattern-1.png';
+import neckTiePattern2 from '../assets/img/patterns/Necktie-pattern-2.png';
+
 
 export default {
 
@@ -108,11 +121,11 @@ export default {
         },
         {
           "name": "BB-SAPPHIRE",
-          "hex": "#30a1b5",
+          "hex": "#1C828A",
           "rgb": {
-            "r": 48,
-            "g": 161,
-            "b": 181
+            "r": 28,
+            "g": 130,
+            "b": 138
           }
         },
         {
@@ -161,12 +174,12 @@ export default {
           }
         },
         {
-          "name": "Deep Navy",
-          "hex": "#2f4a60",
+          "name": "ND- DUSTY BLUE",
+          "hex": "#6F98AB",
           "rgb": {
-            "r": 47,
-            "g": 74,
-            "b": 96
+            "r": 111,
+            "g": 152,
+            "b": 171
           }
         },
         {
@@ -234,11 +247,11 @@ export default {
         },
         {
           "name": "H-CHAMPAGNE",
-          "hex": "#d1c49f",
+          "hex": "#FAF0CD",
           "rgb": {
-            "r": 209,
-            "g": 196,
-            "b": 159
+            "r": 250,
+            "g": 240,
+            "b": 205
           }
         },
         {
@@ -629,12 +642,12 @@ export default {
           }
         },
         {
-          "name": "RR-ROSE",
-          "hex": "#d6949c",
+          "name": "RR- DUSTY ROSE",
+          "hex": "#E69A97",
           "rgb": {
-            "r": 214,
-            "g": 148,
-            "b": 156
+            "r": 230,
+            "g": 154,
+            "b": 151
           }
         },
         {
@@ -675,11 +688,11 @@ export default {
         },
         {
           "name": "V-MINT",
-          "hex": "#adc69f",
+          "hex": "#DDE6D5",
           "rgb": {
-            "r": 173,
-            "g": 198,
-            "b": 159
+            "r": 221,
+            "g": 230,
+            "b": 213
           }
         },
         {
@@ -737,12 +750,12 @@ export default {
           }
         },
         {
-          "name": "Z-EMERALD GREEN",
-          "hex": "#26592f",
+          "name": "Z- KELLY GREEN",
+          "hex": "#129A1E",
           "rgb": {
-            "r": 38,
-            "g": 89,
-            "b": 47
+            "r": 18,
+            "g": 154,
+            "b": 30
           }
         },
         {
@@ -755,22 +768,28 @@ export default {
           }
         },
       ],
+      patterns: [
+        { name: 'pattern 1', type: 'Bow tie', file: bow_p1, part: bowTiePattern1 },
+        { name: 'pattern 2', type: 'Bow tie', file: bow_p2, part: bowTiePattern2 },
+        { name: 'pattern 3', type: 'Neck tie', file: neck_p1, part: neckTiePattern1 },
+        { name: 'pattern 4', type: 'Neck tie', file: neck_p2, part: neckTiePattern2 },
+      ]
     },
     states: [
-      'Alabama', 'Alaska', 'American Samoa', 'Arizona',
-      'Arkansas', 'California', 'Colorado', 'Connecticut',
+      'Alabama', 'Alaska', 'Alberta','American Samoa', 'Arizona',
+      'Arkansas', 'British Columbia', 'California', 'Colorado', 'Connecticut',
       'Delaware', 'District of Columbia', 'Federated States of Micronesia',
       'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho',
       'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
-      'Louisiana', 'Maine', 'Marshall Islands', 'Maryland',
+      'Louisiana', 'Maine', 'Marshall Islands', 'Manitoba', 'Maryland',
       'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
-      'Missouri', 'Montana', 'Nebraska', 'Nevada',
-      'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
-      'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio',
-      'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico',
-      'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee',
+      'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Brunswick',
+      'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'Newfoundland and Labrador',
+      'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Northwest Territories', 'Nova Scotia', 'Nunavut', 'Ohio',
+      'Oklahoma', 'Ontario', 'Oregon', 'Palau', 'Pennsylvania', 'Prince Edward Island', 'Puerto Rico',
+      'Rhode Island', 'Saskatchewan', 'South Carolina', 'South Dakota', 'Tennessee',
       'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia',
-      'Washington', 'West Virginia', 'Wisconsin', 'Wyoming',
+      'Washington', 'West Virginia', 'Wisconsin', 'Wyoming', 'Yukon'
     ],
   }),
 
@@ -780,9 +799,10 @@ export default {
         suit: this.suits[this.suitCombo.suit],
         shirt: this.shirts[this.suitCombo.shirt],
         tie: this.ties.types[this.suitCombo.tie],
-        color: this.ties.colors[this.suitCombo.color]
+        color: this.ties.colors[this.suitCombo.color],
+        pattern: this.ties.patterns[this.suitCombo.pattern],
+        solid_toggle: this.suitCombo.solid_toggle
       }
     }
-  },
-
+  }
 }

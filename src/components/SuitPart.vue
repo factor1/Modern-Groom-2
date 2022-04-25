@@ -1,8 +1,5 @@
 <template>
   <div class="suit-container">
-    <div class="suit-frame" v-if="!nothumbnail">
-      <img class="suit-frame__image" :src="data[active].file" alt="suit">
-    </div>
     <h2 v-if="title">{{ title }}</h2>
     <div class="suit-options"> 
       <div class="suit-options__option-container" v-for="(suit, index ) in data" :key="`suit-${suit.name}`" @click="updateInfo(index)">
