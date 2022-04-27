@@ -28,7 +28,7 @@
         </v-col>
       </v-row>
 
-      <v-row align="start">
+      <v-row align="start" v-if="false">
         <v-col cols="12" sm="12" md="6" offset-md="3" class="share-block">
           <input type="hidden" id="testing-code">
           <div class="buttons-container">
@@ -40,7 +40,7 @@
         </v-col>
       </v-row>
 
-      <v-row align="start">
+      <v-row align="start" v-if="false">
         <v-col cols="12" sm="12" md="6" offset-md="3">
           <h2>Send Us Your Info</h2>
 
