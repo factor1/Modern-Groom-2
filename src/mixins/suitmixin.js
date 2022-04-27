@@ -33,15 +33,52 @@ import neckTiePart from '../assets/img/shirts_and_ties/Necktie.png';
 // Patterns
 import bow_p1 from '../assets/img/preview/p1.jpg';
 import bow_p2 from '../assets/img/preview/p2.jpg';
-import neck_p1 from '../assets/img/preview/p3.jpg';
-import neck_p2 from '../assets/img/preview/p4.jpg';
 
+import neck_p1 from '../assets/img/preview/patterns/600-a-white-paisley.jpg';
+import neck_p2 from '../assets/img/preview/patterns/600b-black-paisley.jpg';
+import neck_p3 from '../assets/img/preview/patterns/600d-silver-paisley.jpg';
+import neck_p4 from '../assets/img/preview/patterns/600e-navy-paisley.jpg';
+import neck_p5 from '../assets/img/preview/patterns/600JJ-ivory-paisley.jpg';
+import neck_p6 from '../assets/img/preview/patterns/600-t-tan-paisley.jpg';
+import neck_p7 from '../assets/img/preview/patterns/600-y-dk-tan-paisley.jpg';
+import neck_p8 from '../assets/img/preview/patterns/2000-lll-mauve.jpg';
+import neck_p9 from '../assets/img/preview/patterns/2000-nm10-navy-white-dot.jpg';
+import neck_p10 from '../assets/img/preview/patterns/2009-nm2-white-grey-dot.jpg';
+import neck_p11 from '../assets/img/preview/patterns/2009-nm3-white-black-dot.jpg';
+import neck_p12 from '../assets/img/preview/patterns/2009-nm4-white-burgundy-dot.jpg';
+import neck_p13 from '../assets/img/preview/patterns/2009-nm5-white-tan-dot.jpg';
+import neck_p14 from '../assets/img/preview/patterns/2009-nm6-white-navy-dot.jpg';
+import neck_p15 from '../assets/img/preview/patterns/2022-aaa-navy-stripe.jpg';
+import neck_p16 from '../assets/img/preview/patterns/2022-naa-tan-stripe.jpg';
+import neck_p17 from '../assets/img/preview/patterns/2022-zz-grey-stripe.jpg';
+import neck_p18 from '../assets/img/preview/patterns/3015-d-white-stripe.jpg';
+import neck_p19 from '../assets/img/preview/patterns/tan-paisley.jpg';
+import neck_p20 from '../assets/img/preview/patterns/white-paisley.jpg';
 
 // Patterns parts
 import bowTiePattern1 from '../assets/img/patterns/Bowtie-pattern-1.png';
 import bowTiePattern2 from '../assets/img/patterns/Bowtie-pattern-2.png';
-import neckTiePattern1 from '../assets/img/patterns/Necktie-pattern-1.png';
-import neckTiePattern2 from '../assets/img/patterns/Necktie-pattern-2.png';
+
+import neckTiePattern1 from '../assets/img/patterns/neckties/600-a-white-paisley.png';
+import neckTiePattern2 from '../assets/img/patterns/neckties/600b-black-paisley.png';
+import neckTiePattern3 from '../assets/img/patterns/neckties/600d-silver-paisley.png';
+import neckTiePattern4 from '../assets/img/patterns/neckties/600e-navy-paisley.png';
+import neckTiePattern5 from '../assets/img/patterns/neckties/600JJ-ivory-paisley.png';
+import neckTiePattern6 from '../assets/img/patterns/neckties/600-t-tan-paisley.png';
+import neckTiePattern7 from '../assets/img/patterns/neckties/600-y-dk-tan-paisley.png';
+import neckTiePattern8 from '../assets/img/patterns/neckties/2000-lll-mauve.png';
+import neckTiePattern9 from '../assets/img/patterns/neckties/2000-nm10-navy-white-dot.png';
+import neckTiePattern10 from '../assets/img/patterns/neckties/2009-nm2-white-grey-dot.png';
+import neckTiePattern11 from '../assets/img/patterns/neckties/2009-nm3-white-black-dot.png';
+import neckTiePattern12 from '../assets/img/patterns/neckties/2009-nm4-white-burgundy-dot.png';
+import neckTiePattern13 from '../assets/img/patterns/neckties/2009-nm5-white-tan-dot.png';
+import neckTiePattern14 from '../assets/img/patterns/neckties/2009-nm6-white-navy-dot.png';
+import neckTiePattern15 from '../assets/img/patterns/neckties/2022-aaa-navy-stripe.png';
+import neckTiePattern16 from '../assets/img/patterns/neckties/2022-naa-tan-stripe.png';
+import neckTiePattern17 from '../assets/img/patterns/neckties/2022-zz-grey-stripe.png';
+import neckTiePattern18 from '../assets/img/patterns/neckties/3015-d-white-stripe.png';
+import neckTiePattern19 from '../assets/img/patterns/neckties/tan-paisley.png';
+import neckTiePattern20 from '../assets/img/patterns/neckties/white-paisley.png';
 
 
 export default {
@@ -49,9 +86,9 @@ export default {
   data: () => ({
     suits: [
       { name: 'Black', color: '#000000', file: blackSuit, part: blackSuitPart },
-      { name: 'MG Blue', color: '#4a537a', file: mgSuit, part: mgSuitPart },
+      { name: 'Heathered Navy', color: '#4a537a', file: mgSuit, part: mgSuitPart },
       { name: 'Charcoal', color: '#5e5a61', file: darkGray, part: darkGraySuitPart },
-      { name: 'Navy', color: '#313042', file: navy, part: navySuitPart },
+      { name: 'Midnight Blue', color: '#313042', file: navy, part: navySuitPart },
       { name: 'Light Grey', color: '#c1bac2', file: silver, part: silverSuitPart }
     ],
     shirts: [
@@ -65,24 +102,6 @@ export default {
         { name: 'Neck tie', file: neckTie, part: neckTiePart }
       ],
       colors: [
-        {
-          "name": "99C-FUSCHIA",
-          "hex": "#dc1e6d",
-          "rgb": {
-            "r": 220,
-            "g": 30,
-            "b": 109
-          }
-        },
-        {
-          "name": "99K-YELLOW",
-          "hex": "#f7e573",
-          "rgb": {
-            "r": 247,
-            "g": 229,
-            "b": 115
-          }
-        },
         {
           "name": "A-WHITE",
           "hex": "#ffffff",
@@ -771,8 +790,27 @@ export default {
       patterns: [
         { name: 'pattern 1', type: 'Bow tie', file: bow_p1, part: bowTiePattern1 },
         { name: 'pattern 2', type: 'Bow tie', file: bow_p2, part: bowTiePattern2 },
-        { name: 'pattern 3', type: 'Neck tie', file: neck_p1, part: neckTiePattern1 },
-        { name: 'pattern 4', type: 'Neck tie', file: neck_p2, part: neckTiePattern2 },
+
+        { name: '600-a-white-paisley', type: 'Neck tie', file: neck_p1, part: neckTiePattern1 },
+        { name: '600b-black-paisley', type: 'Neck tie', file: neck_p2, part: neckTiePattern2 },
+        { name: '600d-silver-paisley', type: 'Neck tie', file: neck_p3, part: neckTiePattern3 },
+        { name: '600e-navy-paisley', type: 'Neck tie', file: neck_p4, part: neckTiePattern4 },
+        { name: '600JJ-ivory-paisley', type: 'Neck tie', file: neck_p5, part: neckTiePattern5 },
+        { name: '600-t-tan-paisley', type: 'Neck tie', file: neck_p6, part: neckTiePattern6 },
+        { name: '600-y-dk-tan-paisley', type: 'Neck tie', file: neck_p7, part: neckTiePattern7 },
+        { name: '2000-lll-mauve', type: 'Neck tie', file: neck_p8, part: neckTiePattern8 },
+        { name: '2000-nm10-navy-white-dot', type: 'Neck tie', file: neck_p9, part: neckTiePattern9 },
+        { name: '2009-nm2-white-grey-dot', type: 'Neck tie', file: neck_p10, part: neckTiePattern10 },
+        { name: '2009-nm3-white-black-dot', type: 'Neck tie', file: neck_p11, part: neckTiePattern11 },
+        { name: '2009-nm4-white-burgundy-dot', type: 'Neck tie', file: neck_p12, part: neckTiePattern12 },
+        { name: '2009-nm5-white-tan-dot', type: 'Neck tie', file: neck_p13, part: neckTiePattern13 },
+        { name: '2009-nm6-white-navy-dot', type: 'Neck tie', file: neck_p14, part: neckTiePattern14 },
+        { name: '2022-aaa-navy-stripe', type: 'Neck tie', file: neck_p15, part: neckTiePattern15 },
+        { name: '2022-naa-tan-stripe', type: 'Neck tie', file: neck_p16, part: neckTiePattern16 },
+        { name: '2022-naa-tan-stripe', type: 'Neck tie', file: neck_p17, part: neckTiePattern17 },
+        { name: '3015-d-white-stripe', type: 'Neck tie', file: neck_p18, part: neckTiePattern18 },
+        { name: 'tan-paisley', type: 'Neck tie', file: neck_p19, part: neckTiePattern19 },
+        { name: 'white-paisley', type: 'Neck tie', file: neck_p20, part: neckTiePattern20 },
       ]
     },
     states: [
