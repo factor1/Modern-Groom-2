@@ -30,15 +30,65 @@ import neckTie from '../assets/img/preview/necktie.jpg';
 import bowTiePart from '../assets/img/shirts_and_ties/Bowtie.png';
 import neckTiePart from '../assets/img/shirts_and_ties/Necktie.png';
 
+// Patterns
+import bow_p1 from '../assets/img/preview/p1.jpg';
+import bow_p2 from '../assets/img/preview/p2.jpg';
+
+import neck_p1 from '../assets/img/preview/patterns/600-a-white-paisley.jpg';
+import neck_p2 from '../assets/img/preview/patterns/600b-black-paisley.jpg';
+import neck_p3 from '../assets/img/preview/patterns/600d-silver-paisley.jpg';
+import neck_p4 from '../assets/img/preview/patterns/600e-navy-paisley.jpg';
+import neck_p5 from '../assets/img/preview/patterns/600JJ-ivory-paisley.jpg';
+import neck_p6 from '../assets/img/preview/patterns/600-t-tan-paisley.jpg';
+import neck_p7 from '../assets/img/preview/patterns/600-y-dk-tan-paisley.jpg';
+import neck_p8 from '../assets/img/preview/patterns/2000-lll-mauve.jpg';
+import neck_p9 from '../assets/img/preview/patterns/2000-nm10-navy-white-dot.jpg';
+import neck_p10 from '../assets/img/preview/patterns/2009-nm2-white-grey-dot.jpg';
+import neck_p11 from '../assets/img/preview/patterns/2009-nm3-white-black-dot.jpg';
+import neck_p12 from '../assets/img/preview/patterns/2009-nm4-white-burgundy-dot.jpg';
+import neck_p13 from '../assets/img/preview/patterns/2009-nm5-white-tan-dot.jpg';
+import neck_p14 from '../assets/img/preview/patterns/2009-nm6-white-navy-dot.jpg';
+import neck_p15 from '../assets/img/preview/patterns/2022-aaa-navy-stripe.jpg';
+import neck_p16 from '../assets/img/preview/patterns/2022-naa-tan-stripe.jpg';
+import neck_p17 from '../assets/img/preview/patterns/2022-zz-grey-stripe.jpg';
+import neck_p18 from '../assets/img/preview/patterns/3015-d-white-stripe.jpg';
+import neck_p19 from '../assets/img/preview/patterns/tan-paisley.jpg';
+import neck_p20 from '../assets/img/preview/patterns/white-paisley.jpg';
+
+// Patterns parts
+import bowTiePattern1 from '../assets/img/patterns/Bowtie-pattern-1.png';
+import bowTiePattern2 from '../assets/img/patterns/Bowtie-pattern-2.png';
+
+import neckTiePattern1 from '../assets/img/patterns/neckties/600-a-white-paisley.png';
+import neckTiePattern2 from '../assets/img/patterns/neckties/600b-black-paisley.png';
+import neckTiePattern3 from '../assets/img/patterns/neckties/600d-silver-paisley.png';
+import neckTiePattern4 from '../assets/img/patterns/neckties/600e-navy-paisley.png';
+import neckTiePattern5 from '../assets/img/patterns/neckties/600JJ-ivory-paisley.png';
+import neckTiePattern6 from '../assets/img/patterns/neckties/600-t-tan-paisley.png';
+import neckTiePattern7 from '../assets/img/patterns/neckties/600-y-dk-tan-paisley.png';
+import neckTiePattern8 from '../assets/img/patterns/neckties/2000-lll-mauve.png';
+import neckTiePattern9 from '../assets/img/patterns/neckties/2000-nm10-navy-white-dot.png';
+import neckTiePattern10 from '../assets/img/patterns/neckties/2009-nm2-white-grey-dot.png';
+import neckTiePattern11 from '../assets/img/patterns/neckties/2009-nm3-white-black-dot.png';
+import neckTiePattern12 from '../assets/img/patterns/neckties/2009-nm4-white-burgundy-dot.png';
+import neckTiePattern13 from '../assets/img/patterns/neckties/2009-nm5-white-tan-dot.png';
+import neckTiePattern14 from '../assets/img/patterns/neckties/2009-nm6-white-navy-dot.png';
+import neckTiePattern15 from '../assets/img/patterns/neckties/2022-aaa-navy-stripe.png';
+import neckTiePattern16 from '../assets/img/patterns/neckties/2022-naa-tan-stripe.png';
+import neckTiePattern17 from '../assets/img/patterns/neckties/2022-zz-grey-stripe.png';
+import neckTiePattern18 from '../assets/img/patterns/neckties/3015-d-white-stripe.png';
+import neckTiePattern19 from '../assets/img/patterns/neckties/tan-paisley.png';
+import neckTiePattern20 from '../assets/img/patterns/neckties/white-paisley.png';
+
 
 export default {
 
   data: () => ({
     suits: [
       { name: 'Black', color: '#000000', file: blackSuit, part: blackSuitPart },
-      { name: 'MG Blue', color: '#4a537a', file: mgSuit, part: mgSuitPart },
+      { name: 'Heathered Navy', color: '#4a537a', file: mgSuit, part: mgSuitPart },
       { name: 'Charcoal', color: '#5e5a61', file: darkGray, part: darkGraySuitPart },
-      { name: 'Navy', color: '#313042', file: navy, part: navySuitPart },
+      { name: 'Midnight Blue', color: '#313042', file: navy, part: navySuitPart },
       { name: 'Light Grey', color: '#c1bac2', file: silver, part: silverSuitPart }
     ],
     shirts: [
@@ -52,24 +102,6 @@ export default {
         { name: 'Neck tie', file: neckTie, part: neckTiePart }
       ],
       colors: [
-        {
-          "name": "99C-FUSCHIA",
-          "hex": "#dc1e6d",
-          "rgb": {
-            "r": 220,
-            "g": 30,
-            "b": 109
-          }
-        },
-        {
-          "name": "99K-YELLOW",
-          "hex": "#f7e573",
-          "rgb": {
-            "r": 247,
-            "g": 229,
-            "b": 115
-          }
-        },
         {
           "name": "A-WHITE",
           "hex": "#ffffff",
@@ -108,11 +140,11 @@ export default {
         },
         {
           "name": "BB-SAPPHIRE",
-          "hex": "#30a1b5",
+          "hex": "#1C828A",
           "rgb": {
-            "r": 48,
-            "g": 161,
-            "b": 181
+            "r": 28,
+            "g": 130,
+            "b": 138
           }
         },
         {
@@ -161,12 +193,12 @@ export default {
           }
         },
         {
-          "name": "Deep Navy",
-          "hex": "#2f4a60",
+          "name": "ND- DUSTY BLUE",
+          "hex": "#6F98AB",
           "rgb": {
-            "r": 47,
-            "g": 74,
-            "b": 96
+            "r": 111,
+            "g": 152,
+            "b": 171
           }
         },
         {
@@ -234,11 +266,11 @@ export default {
         },
         {
           "name": "H-CHAMPAGNE",
-          "hex": "#d1c49f",
+          "hex": "#FAF0CD",
           "rgb": {
-            "r": 209,
-            "g": 196,
-            "b": 159
+            "r": 250,
+            "g": 240,
+            "b": 205
           }
         },
         {
@@ -629,12 +661,12 @@ export default {
           }
         },
         {
-          "name": "RR-ROSE",
-          "hex": "#d6949c",
+          "name": "RR- DUSTY ROSE",
+          "hex": "#E69A97",
           "rgb": {
-            "r": 214,
-            "g": 148,
-            "b": 156
+            "r": 230,
+            "g": 154,
+            "b": 151
           }
         },
         {
@@ -675,11 +707,11 @@ export default {
         },
         {
           "name": "V-MINT",
-          "hex": "#adc69f",
+          "hex": "#DDE6D5",
           "rgb": {
-            "r": 173,
-            "g": 198,
-            "b": 159
+            "r": 221,
+            "g": 230,
+            "b": 213
           }
         },
         {
@@ -737,12 +769,12 @@ export default {
           }
         },
         {
-          "name": "Z-EMERALD GREEN",
-          "hex": "#26592f",
+          "name": "Z- KELLY GREEN",
+          "hex": "#129A1E",
           "rgb": {
-            "r": 38,
-            "g": 89,
-            "b": 47
+            "r": 18,
+            "g": 154,
+            "b": 30
           }
         },
         {
@@ -755,22 +787,41 @@ export default {
           }
         },
       ],
+      patterns: [
+        { name: 'pattern 1', type: 'Bow tie', file: bow_p1, part: bowTiePattern1 },
+        { name: 'pattern 2', type: 'Bow tie', file: bow_p2, part: bowTiePattern2 },
+
+        { name: '600-a-white-paisley', type: 'Neck tie', file: neck_p1, part: neckTiePattern1 },
+        { name: '600b-black-paisley', type: 'Neck tie', file: neck_p2, part: neckTiePattern2 },
+        { name: '600d-silver-paisley', type: 'Neck tie', file: neck_p3, part: neckTiePattern3 },
+        { name: '600e-navy-paisley', type: 'Neck tie', file: neck_p4, part: neckTiePattern4 },
+        { name: '600JJ-ivory-paisley', type: 'Neck tie', file: neck_p5, part: neckTiePattern5 },
+        { name: '600-t-tan-paisley', type: 'Neck tie', file: neck_p6, part: neckTiePattern6 },
+        { name: '600-y-dk-tan-paisley', type: 'Neck tie', file: neck_p7, part: neckTiePattern7 },
+        { name: '2000-lll-mauve', type: 'Neck tie', file: neck_p8, part: neckTiePattern8 },
+        { name: '2022-aaa-navy-stripe', type: 'Neck tie', file: neck_p15, part: neckTiePattern15 },
+        { name: '2022-naa-tan-stripe', type: 'Neck tie', file: neck_p16, part: neckTiePattern16 },
+        { name: '2022-naa-tan-stripe', type: 'Neck tie', file: neck_p17, part: neckTiePattern17 },
+        { name: '3015-d-white-stripe', type: 'Neck tie', file: neck_p18, part: neckTiePattern18 },
+        { name: 'tan-paisley', type: 'Neck tie', file: neck_p19, part: neckTiePattern19 },
+        { name: 'white-paisley', type: 'Neck tie', file: neck_p20, part: neckTiePattern20 },
+      ]
     },
     states: [
-      'Alabama', 'Alaska', 'American Samoa', 'Arizona',
-      'Arkansas', 'California', 'Colorado', 'Connecticut',
+      'Alabama', 'Alaska', 'Alberta','American Samoa', 'Arizona',
+      'Arkansas', 'British Columbia', 'California', 'Colorado', 'Connecticut',
       'Delaware', 'District of Columbia', 'Federated States of Micronesia',
       'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho',
       'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
-      'Louisiana', 'Maine', 'Marshall Islands', 'Maryland',
+      'Louisiana', 'Maine', 'Marshall Islands', 'Manitoba', 'Maryland',
       'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
-      'Missouri', 'Montana', 'Nebraska', 'Nevada',
-      'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
-      'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio',
-      'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico',
-      'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee',
+      'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Brunswick',
+      'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'Newfoundland and Labrador',
+      'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Northwest Territories', 'Nova Scotia', 'Nunavut', 'Ohio',
+      'Oklahoma', 'Ontario', 'Oregon', 'Palau', 'Pennsylvania', 'Prince Edward Island', 'Puerto Rico',
+      'Rhode Island', 'Saskatchewan', 'South Carolina', 'South Dakota', 'Tennessee',
       'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia',
-      'Washington', 'West Virginia', 'Wisconsin', 'Wyoming',
+      'Washington', 'West Virginia', 'Wisconsin', 'Wyoming', 'Yukon'
     ],
   }),
 
@@ -780,9 +831,10 @@ export default {
         suit: this.suits[this.suitCombo.suit],
         shirt: this.shirts[this.suitCombo.shirt],
         tie: this.ties.types[this.suitCombo.tie],
-        color: this.ties.colors[this.suitCombo.color]
+        color: this.ties.colors[this.suitCombo.color],
+        pattern: this.ties.patterns[this.suitCombo.pattern],
+        solid_toggle: this.suitCombo.solid_toggle
       }
     }
-  },
-
+  }
 }
